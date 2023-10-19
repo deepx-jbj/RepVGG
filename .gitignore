@@ -1,2 +1,4 @@
 .idea/
 *nori*
+*.onnx
+*.pth

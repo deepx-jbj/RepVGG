@@ -23,9 +23,9 @@ def build_loader(config):
     config.defrost()
     dataset_train, config.MODEL.NUM_CLASSES = build_dataset(is_train=True, config=config)
     config.freeze()
-    print(f"local rank {config.LOCAL_RANK} / global rank {dist.get_rank()} successfully build train dataset")
+    # print(f"local rank {config.LOCAL_RANK} / global rank {dist.get_rank()} successfully build train dataset")
     dataset_val, _ = build_dataset(is_train=False, config=config)
-    print(f"local rank {config.LOCAL_RANK} / global rank {dist.get_rank()} successfully build val dataset")
+    # print(f"local rank {config.LOCAL_RANK} / global rank {dist.get_rank()} successfully build val dataset")
 
     num_tasks = dist.get_world_size()
     global_rank = dist.get_rank()
@@ -86,8 +86,14 @@ def build_dataset(is_train, config):
                                         cache_mode=config.DATA.CACHE_MODE if is_train else 'part')
         else:
             import torchvision
-            print('use raw ImageNet data')
-            dataset = torchvision.datasets.ImageNet(root=config.DATA.DATA_PATH, split='train' if is_train else 'val', transform=transform)
+            # print('use raw ImageNet data')
+            # dataset = torchvision.datasets.ImageNet(root=config.DATA.DATA_PATH, split='train' if is_train else 'val', transform=transform)
+            dataset = torchvision.datasets.ImageFolder(
+                    config.DATA.DATA_PATH + "/" + 'train' if is_train else config.DATA.DATA_PATH + "/" + 'val',
+                    transform=transform
+            )
+            
+            
         nb_classes = 1000
 
     elif config.DATA.DATASET == 'cf100':

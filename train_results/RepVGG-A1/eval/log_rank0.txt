@@ -1,0 +1,1088 @@
+[2023-10-16 16:43:22 RepVGG-A1] (main.py 477): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:43:22 RepVGG-A1] (main.py 480): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:43:26 RepVGG-A1] (main.py 87): INFO Creating model:RepVGG-A1
+[2023-10-16 16:43:27 RepVGG-A1] (main.py 97): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-16 16:43:40 RepVGG-A1] (main.py 150): INFO number of params: 12796478
+[2023-10-16 16:45:10 RepVGG-A1] (main.py 478): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:45:10 RepVGG-A1] (main.py 481): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:45:48 RepVGG-A1] (main.py 478): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:45:48 RepVGG-A1] (main.py 481): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:47:55 RepVGG-A1] (main.py 478): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:47:55 RepVGG-A1] (main.py 481): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:48:41 RepVGG-A1] (main.py 479): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:48:41 RepVGG-A1] (main.py 482): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:49:06 RepVGG-A1] (main.py 479): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:49:06 RepVGG-A1] (main.py 482): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:49:35 RepVGG-A1] (main.py 479): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:49:35 RepVGG-A1] (main.py 482): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:50:19 RepVGG-A1] (main.py 480): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:50:19 RepVGG-A1] (main.py 483): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:51:13 RepVGG-A1] (main.py 481): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:51:13 RepVGG-A1] (main.py 484): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:52:09 RepVGG-A1] (main.py 480): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:52:09 RepVGG-A1] (main.py 483): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:53:00 RepVGG-A1] (main.py 479): INFO Full config saved to train_results/RepVGG-A1/eval/config.json
+[2023-10-16 16:53:00 RepVGG-A1] (main.py 482): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval
+PRINT_FREQ: 10
+SAVE_FREQ: 20
+SEED: 0
+TAG: eval
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-16 16:53:09 RepVGG-A1] (main.py 395): INFO Test: [0/1563]	Time 2.892 (2.892)	Loss 3.4368 (3.4368)	Acc@1 28.125 (28.125)	Acc@5 46.875 (46.875)	Mem 38MB
+[2023-10-16 16:53:10 RepVGG-A1] (main.py 395): INFO Test: [10/1563]	Time 0.140 (0.381)	Loss 3.6381 (3.7313)	Acc@1 31.250 (28.977)	Acc@5 56.250 (51.136)	Mem 38MB
+[2023-10-16 16:53:11 RepVGG-A1] (main.py 395): INFO Test: [20/1563]	Time 0.136 (0.261)	Loss 3.1221 (3.6430)	Acc@1 25.000 (29.167)	Acc@5 46.875 (52.827)	Mem 38MB
+[2023-10-16 16:53:13 RepVGG-A1] (main.py 395): INFO Test: [30/1563]	Time 0.128 (0.219)	Loss 3.7666 (3.7054)	Acc@1 25.000 (28.730)	Acc@5 50.000 (52.923)	Mem 38MB
+[2023-10-16 16:53:14 RepVGG-A1] (main.py 395): INFO Test: [40/1563]	Time 0.131 (0.197)	Loss 3.3153 (3.7061)	Acc@1 34.375 (29.649)	Acc@5 59.375 (52.668)	Mem 38MB
+[2023-10-16 16:53:15 RepVGG-A1] (main.py 395): INFO Test: [50/1563]	Time 0.128 (0.184)	Loss 3.6116 (3.6899)	Acc@1 18.750 (29.657)	Acc@5 46.875 (52.696)	Mem 38MB
+[2023-10-16 16:53:16 RepVGG-A1] (main.py 395): INFO Test: [60/1563]	Time 0.130 (0.175)	Loss 3.6031 (3.7025)	Acc@1 31.250 (29.457)	Acc@5 62.500 (52.920)	Mem 38MB
+[2023-10-16 16:53:18 RepVGG-A1] (main.py 395): INFO Test: [70/1563]	Time 0.113 (0.169)	Loss 3.4323 (3.7056)	Acc@1 31.250 (29.489)	Acc@5 53.125 (52.861)	Mem 38MB
+[2023-10-16 16:53:19 RepVGG-A1] (main.py 395): INFO Test: [80/1563]	Time 0.135 (0.164)	Loss 3.3472 (3.7401)	Acc@1 31.250 (29.244)	Acc@5 56.250 (52.353)	Mem 38MB
+[2023-10-16 16:53:20 RepVGG-A1] (main.py 395): INFO Test: [90/1563]	Time 0.136 (0.160)	Loss 3.4647 (3.7340)	Acc@1 28.125 (29.361)	Acc@5 53.125 (52.438)	Mem 38MB
+[2023-10-16 16:53:22 RepVGG-A1] (main.py 395): INFO Test: [100/1563]	Time 0.135 (0.158)	Loss 3.6928 (3.7131)	Acc@1 31.250 (29.455)	Acc@5 46.875 (52.816)	Mem 38MB
+[2023-10-16 16:53:23 RepVGG-A1] (main.py 395): INFO Test: [110/1563]	Time 0.129 (0.155)	Loss 3.3710 (3.7147)	Acc@1 37.500 (29.195)	Acc@5 56.250 (52.815)	Mem 38MB
+[2023-10-16 16:53:24 RepVGG-A1] (main.py 395): INFO Test: [120/1563]	Time 0.136 (0.153)	Loss 3.7152 (3.7240)	Acc@1 31.250 (29.416)	Acc@5 50.000 (52.789)	Mem 38MB
+[2023-10-16 16:53:26 RepVGG-A1] (main.py 395): INFO Test: [130/1563]	Time 0.118 (0.151)	Loss 4.5710 (3.7336)	Acc@1 21.875 (29.389)	Acc@5 37.500 (52.624)	Mem 38MB
+[2023-10-16 16:53:27 RepVGG-A1] (main.py 395): INFO Test: [140/1563]	Time 0.134 (0.150)	Loss 4.0225 (3.7281)	Acc@1 21.875 (29.078)	Acc@5 46.875 (52.682)	Mem 38MB
+[2023-10-16 16:53:28 RepVGG-A1] (main.py 395): INFO Test: [150/1563]	Time 0.137 (0.149)	Loss 4.0596 (3.7230)	Acc@1 21.875 (29.263)	Acc@5 56.250 (52.815)	Mem 38MB
+[2023-10-16 16:53:30 RepVGG-A1] (main.py 395): INFO Test: [160/1563]	Time 0.126 (0.148)	Loss 3.9000 (3.7346)	Acc@1 28.125 (29.095)	Acc@5 53.125 (52.814)	Mem 38MB
+[2023-10-16 16:53:31 RepVGG-A1] (main.py 395): INFO Test: [170/1563]	Time 0.133 (0.147)	Loss 3.1732 (3.7298)	Acc@1 43.750 (29.240)	Acc@5 75.000 (52.997)	Mem 38MB
+[2023-10-16 16:53:32 RepVGG-A1] (main.py 395): INFO Test: [180/1563]	Time 0.132 (0.146)	Loss 4.2115 (3.7327)	Acc@1 34.375 (29.178)	Acc@5 50.000 (52.883)	Mem 38MB
+[2023-10-16 16:53:34 RepVGG-A1] (main.py 395): INFO Test: [190/1563]	Time 0.133 (0.145)	Loss 2.8957 (3.7268)	Acc@1 37.500 (29.221)	Acc@5 56.250 (52.896)	Mem 38MB
+[2023-10-16 16:53:35 RepVGG-A1] (main.py 395): INFO Test: [200/1563]	Time 0.132 (0.145)	Loss 4.0759 (3.7415)	Acc@1 31.250 (29.073)	Acc@5 56.250 (52.581)	Mem 38MB
+[2023-10-16 16:53:36 RepVGG-A1] (main.py 395): INFO Test: [210/1563]	Time 0.119 (0.144)	Loss 4.3854 (3.7438)	Acc@1 21.875 (29.191)	Acc@5 50.000 (52.621)	Mem 38MB
+[2023-10-16 16:53:37 RepVGG-A1] (main.py 395): INFO Test: [220/1563]	Time 0.140 (0.144)	Loss 3.5832 (3.7608)	Acc@1 31.250 (29.171)	Acc@5 59.375 (52.489)	Mem 38MB
+[2023-10-16 16:53:39 RepVGG-A1] (main.py 395): INFO Test: [230/1563]	Time 0.126 (0.143)	Loss 3.8487 (3.7652)	Acc@1 28.125 (29.153)	Acc@5 50.000 (52.489)	Mem 38MB
+[2023-10-16 16:53:40 RepVGG-A1] (main.py 395): INFO Test: [240/1563]	Time 0.136 (0.143)	Loss 3.8607 (3.7696)	Acc@1 34.375 (28.994)	Acc@5 46.875 (52.399)	Mem 38MB
+[2023-10-16 16:53:41 RepVGG-A1] (main.py 395): INFO Test: [250/1563]	Time 0.127 (0.142)	Loss 4.1292 (3.7687)	Acc@1 28.125 (28.972)	Acc@5 46.875 (52.366)	Mem 38MB
+[2023-10-16 16:53:43 RepVGG-A1] (main.py 395): INFO Test: [260/1563]	Time 0.145 (0.142)	Loss 4.1841 (3.7657)	Acc@1 21.875 (29.011)	Acc@5 34.375 (52.227)	Mem 38MB
+[2023-10-16 16:53:44 RepVGG-A1] (main.py 395): INFO Test: [270/1563]	Time 0.118 (0.141)	Loss 4.0739 (3.7768)	Acc@1 28.125 (29.071)	Acc@5 43.750 (52.064)	Mem 38MB
+[2023-10-16 16:53:45 RepVGG-A1] (main.py 395): INFO Test: [280/1563]	Time 0.114 (0.141)	Loss 3.6977 (3.7721)	Acc@1 25.000 (29.104)	Acc@5 50.000 (52.146)	Mem 38MB
+[2023-10-16 16:53:47 RepVGG-A1] (main.py 395): INFO Test: [290/1563]	Time 0.116 (0.140)	Loss 4.8693 (3.7755)	Acc@1 21.875 (29.081)	Acc@5 46.875 (52.083)	Mem 38MB
+[2023-10-16 16:53:48 RepVGG-A1] (main.py 395): INFO Test: [300/1563]	Time 0.132 (0.140)	Loss 3.8556 (3.7747)	Acc@1 21.875 (29.039)	Acc@5 40.625 (52.066)	Mem 38MB
+[2023-10-16 16:53:49 RepVGG-A1] (main.py 395): INFO Test: [310/1563]	Time 0.127 (0.140)	Loss 3.4908 (3.7805)	Acc@1 34.375 (28.909)	Acc@5 56.250 (52.050)	Mem 38MB
+[2023-10-16 16:53:51 RepVGG-A1] (main.py 395): INFO Test: [320/1563]	Time 0.123 (0.140)	Loss 3.7078 (3.7852)	Acc@1 31.250 (28.884)	Acc@5 62.500 (52.074)	Mem 38MB
+[2023-10-16 16:53:52 RepVGG-A1] (main.py 395): INFO Test: [330/1563]	Time 0.117 (0.139)	Loss 3.8729 (3.7922)	Acc@1 28.125 (28.786)	Acc@5 46.875 (51.926)	Mem 38MB
+[2023-10-16 16:53:53 RepVGG-A1] (main.py 395): INFO Test: [340/1563]	Time 0.123 (0.139)	Loss 3.5808 (3.7889)	Acc@1 25.000 (28.712)	Acc@5 53.125 (51.979)	Mem 38MB
+[2023-10-16 16:53:54 RepVGG-A1] (main.py 395): INFO Test: [350/1563]	Time 0.097 (0.138)	Loss 3.9872 (3.7916)	Acc@1 21.875 (28.579)	Acc@5 59.375 (51.968)	Mem 38MB
+[2023-10-16 16:53:55 RepVGG-A1] (main.py 395): INFO Test: [360/1563]	Time 0.097 (0.137)	Loss 3.9810 (3.7821)	Acc@1 31.250 (28.705)	Acc@5 46.875 (52.095)	Mem 38MB
+[2023-10-16 16:53:56 RepVGG-A1] (main.py 395): INFO Test: [370/1563]	Time 0.092 (0.136)	Loss 4.3198 (3.7787)	Acc@1 15.625 (28.715)	Acc@5 31.250 (52.131)	Mem 38MB
+[2023-10-16 16:53:57 RepVGG-A1] (main.py 395): INFO Test: [380/1563]	Time 0.095 (0.135)	Loss 5.4157 (3.7832)	Acc@1 21.875 (28.716)	Acc@5 43.750 (52.075)	Mem 38MB
+[2023-10-16 16:53:58 RepVGG-A1] (main.py 395): INFO Test: [390/1563]	Time 0.095 (0.134)	Loss 3.4475 (3.7807)	Acc@1 18.750 (28.740)	Acc@5 59.375 (52.102)	Mem 38MB
+[2023-10-16 16:53:59 RepVGG-A1] (main.py 395): INFO Test: [400/1563]	Time 0.090 (0.133)	Loss 3.1365 (3.7765)	Acc@1 37.500 (28.803)	Acc@5 59.375 (52.151)	Mem 38MB
+[2023-10-16 16:54:00 RepVGG-A1] (main.py 395): INFO Test: [410/1563]	Time 0.096 (0.132)	Loss 4.2440 (3.7762)	Acc@1 9.375 (28.817)	Acc@5 43.750 (52.197)	Mem 38MB
+[2023-10-16 16:54:01 RepVGG-A1] (main.py 395): INFO Test: [420/1563]	Time 0.090 (0.131)	Loss 4.0797 (3.7776)	Acc@1 31.250 (28.786)	Acc@5 43.750 (52.056)	Mem 38MB
+[2023-10-16 16:54:02 RepVGG-A1] (main.py 395): INFO Test: [430/1563]	Time 0.096 (0.130)	Loss 3.9403 (3.7786)	Acc@1 31.250 (28.749)	Acc@5 46.875 (52.059)	Mem 38MB
+[2023-10-16 16:54:03 RepVGG-A1] (main.py 395): INFO Test: [440/1563]	Time 0.097 (0.129)	Loss 4.1812 (3.7813)	Acc@1 37.500 (28.756)	Acc@5 50.000 (52.027)	Mem 38MB
+[2023-10-16 16:54:04 RepVGG-A1] (main.py 395): INFO Test: [450/1563]	Time 0.096 (0.129)	Loss 3.1934 (3.7766)	Acc@1 28.125 (28.811)	Acc@5 65.625 (52.072)	Mem 38MB
+[2023-10-16 16:54:05 RepVGG-A1] (main.py 395): INFO Test: [460/1563]	Time 0.100 (0.128)	Loss 3.7526 (3.7825)	Acc@1 34.375 (28.735)	Acc@5 56.250 (51.945)	Mem 38MB
+[2023-10-16 16:54:06 RepVGG-A1] (main.py 395): INFO Test: [470/1563]	Time 0.095 (0.127)	Loss 3.9655 (3.7816)	Acc@1 34.375 (28.682)	Acc@5 50.000 (51.990)	Mem 38MB
+[2023-10-16 16:54:07 RepVGG-A1] (main.py 395): INFO Test: [480/1563]	Time 0.101 (0.127)	Loss 3.2677 (3.7828)	Acc@1 34.375 (28.664)	Acc@5 68.750 (52.040)	Mem 38MB
+[2023-10-16 16:54:08 RepVGG-A1] (main.py 395): INFO Test: [490/1563]	Time 0.096 (0.126)	Loss 3.5035 (3.7811)	Acc@1 31.250 (28.634)	Acc@5 62.500 (52.100)	Mem 38MB
+[2023-10-16 16:54:09 RepVGG-A1] (main.py 395): INFO Test: [500/1563]	Time 0.097 (0.126)	Loss 4.0006 (3.7828)	Acc@1 25.000 (28.605)	Acc@5 50.000 (52.071)	Mem 38MB
+[2023-10-16 16:54:10 RepVGG-A1] (main.py 395): INFO Test: [510/1563]	Time 0.098 (0.125)	Loss 4.2037 (3.7815)	Acc@1 28.125 (28.626)	Acc@5 37.500 (52.085)	Mem 38MB
+[2023-10-16 16:54:11 RepVGG-A1] (main.py 395): INFO Test: [520/1563]	Time 0.100 (0.124)	Loss 4.0684 (3.7800)	Acc@1 25.000 (28.629)	Acc@5 50.000 (52.117)	Mem 38MB
+[2023-10-16 16:54:12 RepVGG-A1] (main.py 395): INFO Test: [530/1563]	Time 0.099 (0.124)	Loss 3.5670 (3.7777)	Acc@1 25.000 (28.649)	Acc@5 53.125 (52.195)	Mem 38MB
+[2023-10-16 16:54:13 RepVGG-A1] (main.py 395): INFO Test: [540/1563]	Time 0.091 (0.123)	Loss 3.7417 (3.7747)	Acc@1 31.250 (28.662)	Acc@5 56.250 (52.212)	Mem 38MB
+[2023-10-16 16:54:14 RepVGG-A1] (main.py 395): INFO Test: [550/1563]	Time 0.102 (0.123)	Loss 3.3852 (3.7710)	Acc@1 31.250 (28.698)	Acc@5 53.125 (52.291)	Mem 38MB
+[2023-10-16 16:54:15 RepVGG-A1] (main.py 395): INFO Test: [560/1563]	Time 0.105 (0.123)	Loss 3.1737 (3.7706)	Acc@1 34.375 (28.660)	Acc@5 62.500 (52.312)	Mem 38MB
+[2023-10-16 16:54:16 RepVGG-A1] (main.py 395): INFO Test: [570/1563]	Time 0.095 (0.122)	Loss 3.4802 (3.7728)	Acc@1 25.000 (28.618)	Acc@5 62.500 (52.293)	Mem 38MB
+[2023-10-16 16:54:16 RepVGG-A1] (main.py 395): INFO Test: [580/1563]	Time 0.103 (0.122)	Loss 3.5375 (3.7684)	Acc@1 31.250 (28.593)	Acc@5 62.500 (52.377)	Mem 38MB
+[2023-10-16 16:54:17 RepVGG-A1] (main.py 395): INFO Test: [590/1563]	Time 0.096 (0.121)	Loss 3.6117 (3.7703)	Acc@1 31.250 (28.585)	Acc@5 56.250 (52.332)	Mem 38MB
+[2023-10-16 16:54:18 RepVGG-A1] (main.py 395): INFO Test: [600/1563]	Time 0.095 (0.121)	Loss 4.3744 (3.7695)	Acc@1 37.500 (28.583)	Acc@5 43.750 (52.309)	Mem 38MB
+[2023-10-16 16:54:19 RepVGG-A1] (main.py 395): INFO Test: [610/1563]	Time 0.098 (0.121)	Loss 4.3893 (3.7667)	Acc@1 28.125 (28.657)	Acc@5 50.000 (52.342)	Mem 38MB
+[2023-10-16 16:54:20 RepVGG-A1] (main.py 395): INFO Test: [620/1563]	Time 0.091 (0.120)	Loss 3.2944 (3.7667)	Acc@1 25.000 (28.618)	Acc@5 46.875 (52.325)	Mem 38MB
+[2023-10-16 16:54:21 RepVGG-A1] (main.py 395): INFO Test: [630/1563]	Time 0.096 (0.120)	Loss 5.1442 (3.7716)	Acc@1 28.125 (28.645)	Acc@5 34.375 (52.313)	Mem 38MB
+[2023-10-16 16:54:22 RepVGG-A1] (main.py 395): INFO Test: [640/1563]	Time 0.097 (0.119)	Loss 4.3418 (3.7706)	Acc@1 21.875 (28.642)	Acc@5 40.625 (52.330)	Mem 38MB
+[2023-10-16 16:54:23 RepVGG-A1] (main.py 395): INFO Test: [650/1563]	Time 0.096 (0.119)	Loss 3.9520 (3.7759)	Acc@1 28.125 (28.557)	Acc@5 46.875 (52.290)	Mem 38MB
+[2023-10-16 16:54:24 RepVGG-A1] (main.py 395): INFO Test: [660/1563]	Time 0.099 (0.119)	Loss 3.8415 (3.7763)	Acc@1 31.250 (28.584)	Acc@5 50.000 (52.279)	Mem 38MB
+[2023-10-16 16:54:25 RepVGG-A1] (main.py 395): INFO Test: [670/1563]	Time 0.103 (0.118)	Loss 4.4948 (3.7792)	Acc@1 25.000 (28.553)	Acc@5 43.750 (52.217)	Mem 38MB
+[2023-10-16 16:54:26 RepVGG-A1] (main.py 395): INFO Test: [680/1563]	Time 0.101 (0.118)	Loss 3.8729 (3.7809)	Acc@1 31.250 (28.556)	Acc@5 46.875 (52.198)	Mem 38MB
+[2023-10-16 16:54:27 RepVGG-A1] (main.py 395): INFO Test: [690/1563]	Time 0.091 (0.118)	Loss 3.5612 (3.7779)	Acc@1 21.875 (28.568)	Acc@5 53.125 (52.257)	Mem 38MB
+[2023-10-16 16:54:28 RepVGG-A1] (main.py 395): INFO Test: [700/1563]	Time 0.101 (0.118)	Loss 3.7885 (3.7764)	Acc@1 15.625 (28.557)	Acc@5 50.000 (52.296)	Mem 38MB
+[2023-10-16 16:54:29 RepVGG-A1] (main.py 395): INFO Test: [710/1563]	Time 0.097 (0.117)	Loss 3.6037 (3.7778)	Acc@1 37.500 (28.582)	Acc@5 56.250 (52.268)	Mem 38MB
+[2023-10-16 16:54:30 RepVGG-A1] (main.py 395): INFO Test: [720/1563]	Time 0.091 (0.117)	Loss 3.5767 (3.7741)	Acc@1 21.875 (28.597)	Acc@5 50.000 (52.275)	Mem 38MB
+[2023-10-16 16:54:31 RepVGG-A1] (main.py 395): INFO Test: [730/1563]	Time 0.096 (0.117)	Loss 4.6501 (3.7772)	Acc@1 18.750 (28.540)	Acc@5 37.500 (52.219)	Mem 38MB
+[2023-10-16 16:54:32 RepVGG-A1] (main.py 395): INFO Test: [740/1563]	Time 0.098 (0.116)	Loss 3.7708 (3.7721)	Acc@1 25.000 (28.644)	Acc@5 46.875 (52.273)	Mem 38MB
+[2023-10-16 16:54:33 RepVGG-A1] (main.py 395): INFO Test: [750/1563]	Time 0.096 (0.116)	Loss 3.8806 (3.7738)	Acc@1 25.000 (28.624)	Acc@5 56.250 (52.243)	Mem 38MB
+[2023-10-16 16:54:34 RepVGG-A1] (main.py 395): INFO Test: [760/1563]	Time 0.097 (0.116)	Loss 3.5016 (3.7736)	Acc@1 28.125 (28.642)	Acc@5 46.875 (52.222)	Mem 38MB
+[2023-10-16 16:54:35 RepVGG-A1] (main.py 395): INFO Test: [770/1563]	Time 0.095 (0.116)	Loss 3.7009 (3.7748)	Acc@1 37.500 (28.648)	Acc@5 56.250 (52.225)	Mem 38MB
+[2023-10-16 16:54:36 RepVGG-A1] (main.py 395): INFO Test: [780/1563]	Time 0.098 (0.115)	Loss 3.3111 (3.7708)	Acc@1 37.500 (28.705)	Acc@5 53.125 (52.277)	Mem 38MB
+[2023-10-16 16:54:37 RepVGG-A1] (main.py 395): INFO Test: [790/1563]	Time 0.091 (0.115)	Loss 4.5140 (3.7753)	Acc@1 21.875 (28.718)	Acc@5 31.250 (52.244)	Mem 38MB
+[2023-10-16 16:54:38 RepVGG-A1] (main.py 395): INFO Test: [800/1563]	Time 0.097 (0.115)	Loss 3.4185 (3.7769)	Acc@1 31.250 (28.722)	Acc@5 59.375 (52.200)	Mem 38MB
+[2023-10-16 16:54:39 RepVGG-A1] (main.py 395): INFO Test: [810/1563]	Time 0.096 (0.115)	Loss 3.0897 (3.7767)	Acc@1 34.375 (28.753)	Acc@5 62.500 (52.212)	Mem 38MB
+[2023-10-16 16:54:40 RepVGG-A1] (main.py 395): INFO Test: [820/1563]	Time 0.091 (0.115)	Loss 3.3902 (3.7759)	Acc@1 28.125 (28.723)	Acc@5 62.500 (52.215)	Mem 38MB
+[2023-10-16 16:54:41 RepVGG-A1] (main.py 395): INFO Test: [830/1563]	Time 0.097 (0.114)	Loss 3.7063 (3.7777)	Acc@1 25.000 (28.719)	Acc@5 53.125 (52.196)	Mem 38MB
+[2023-10-16 16:54:42 RepVGG-A1] (main.py 395): INFO Test: [840/1563]	Time 0.097 (0.114)	Loss 4.0517 (3.7795)	Acc@1 28.125 (28.727)	Acc@5 53.125 (52.170)	Mem 38MB
+[2023-10-16 16:54:43 RepVGG-A1] (main.py 395): INFO Test: [850/1563]	Time 0.101 (0.114)	Loss 3.5867 (3.7813)	Acc@1 28.125 (28.731)	Acc@5 53.125 (52.178)	Mem 38MB
+[2023-10-16 16:54:44 RepVGG-A1] (main.py 395): INFO Test: [860/1563]	Time 0.091 (0.114)	Loss 3.7944 (3.7816)	Acc@1 21.875 (28.724)	Acc@5 50.000 (52.134)	Mem 38MB
+[2023-10-16 16:54:45 RepVGG-A1] (main.py 395): INFO Test: [870/1563]	Time 0.099 (0.114)	Loss 4.7135 (3.7810)	Acc@1 28.125 (28.746)	Acc@5 40.625 (52.113)	Mem 38MB
+[2023-10-16 16:54:46 RepVGG-A1] (main.py 395): INFO Test: [880/1563]	Time 0.096 (0.113)	Loss 3.6744 (3.7815)	Acc@1 31.250 (28.749)	Acc@5 53.125 (52.103)	Mem 38MB
+[2023-10-16 16:54:47 RepVGG-A1] (main.py 395): INFO Test: [890/1563]	Time 0.095 (0.113)	Loss 3.9753 (3.7809)	Acc@1 15.625 (28.732)	Acc@5 56.250 (52.136)	Mem 38MB
+[2023-10-16 16:54:48 RepVGG-A1] (main.py 395): INFO Test: [900/1563]	Time 0.090 (0.113)	Loss 4.0698 (3.7793)	Acc@1 25.000 (28.746)	Acc@5 53.125 (52.161)	Mem 38MB
+[2023-10-16 16:54:49 RepVGG-A1] (main.py 395): INFO Test: [910/1563]	Time 0.097 (0.113)	Loss 3.9692 (3.7754)	Acc@1 21.875 (28.760)	Acc@5 37.500 (52.202)	Mem 38MB
+[2023-10-16 16:54:50 RepVGG-A1] (main.py 395): INFO Test: [920/1563]	Time 0.116 (0.113)	Loss 3.2443 (3.7772)	Acc@1 53.125 (28.776)	Acc@5 59.375 (52.199)	Mem 38MB
+[2023-10-16 16:54:51 RepVGG-A1] (main.py 395): INFO Test: [930/1563]	Time 0.097 (0.113)	Loss 3.5960 (3.7747)	Acc@1 18.750 (28.793)	Acc@5 50.000 (52.249)	Mem 38MB
+[2023-10-16 16:54:52 RepVGG-A1] (main.py 395): INFO Test: [940/1563]	Time 0.099 (0.112)	Loss 4.1728 (3.7743)	Acc@1 21.875 (28.773)	Acc@5 43.750 (52.272)	Mem 38MB
+[2023-10-16 16:54:52 RepVGG-A1] (main.py 395): INFO Test: [950/1563]	Time 0.097 (0.112)	Loss 3.6856 (3.7754)	Acc@1 31.250 (28.779)	Acc@5 50.000 (52.261)	Mem 38MB
+[2023-10-16 16:54:53 RepVGG-A1] (main.py 395): INFO Test: [960/1563]	Time 0.096 (0.112)	Loss 4.5186 (3.7763)	Acc@1 25.000 (28.782)	Acc@5 46.875 (52.250)	Mem 38MB
+[2023-10-16 16:54:54 RepVGG-A1] (main.py 395): INFO Test: [970/1563]	Time 0.092 (0.112)	Loss 5.0804 (3.7769)	Acc@1 18.750 (28.762)	Acc@5 46.875 (52.237)	Mem 38MB
+[2023-10-16 16:54:55 RepVGG-A1] (main.py 395): INFO Test: [980/1563]	Time 0.099 (0.112)	Loss 4.0639 (3.7789)	Acc@1 18.750 (28.730)	Acc@5 40.625 (52.192)	Mem 38MB
+[2023-10-16 16:54:56 RepVGG-A1] (main.py 395): INFO Test: [990/1563]	Time 0.105 (0.112)	Loss 3.5238 (3.7797)	Acc@1 31.250 (28.708)	Acc@5 53.125 (52.176)	Mem 38MB
+[2023-10-16 16:54:57 RepVGG-A1] (main.py 395): INFO Test: [1000/1563]	Time 0.097 (0.111)	Loss 4.7794 (3.7831)	Acc@1 18.750 (28.684)	Acc@5 37.500 (52.154)	Mem 38MB
+[2023-10-16 16:54:58 RepVGG-A1] (main.py 395): INFO Test: [1010/1563]	Time 0.104 (0.111)	Loss 3.3539 (3.7817)	Acc@1 31.250 (28.684)	Acc@5 65.625 (52.164)	Mem 38MB
+[2023-10-16 16:54:59 RepVGG-A1] (main.py 395): INFO Test: [1020/1563]	Time 0.098 (0.111)	Loss 3.5767 (3.7803)	Acc@1 34.375 (28.688)	Acc@5 53.125 (52.167)	Mem 38MB
+[2023-10-16 16:55:00 RepVGG-A1] (main.py 395): INFO Test: [1030/1563]	Time 0.093 (0.111)	Loss 4.1278 (3.7828)	Acc@1 15.625 (28.646)	Acc@5 34.375 (52.119)	Mem 38MB
+[2023-10-16 16:55:01 RepVGG-A1] (main.py 395): INFO Test: [1040/1563]	Time 0.097 (0.111)	Loss 3.3752 (3.7840)	Acc@1 21.875 (28.611)	Acc@5 53.125 (52.086)	Mem 38MB
+[2023-10-16 16:55:02 RepVGG-A1] (main.py 395): INFO Test: [1050/1563]	Time 0.091 (0.111)	Loss 4.0323 (3.7834)	Acc@1 21.875 (28.604)	Acc@5 50.000 (52.096)	Mem 38MB
+[2023-10-16 16:55:03 RepVGG-A1] (main.py 395): INFO Test: [1060/1563]	Time 0.098 (0.111)	Loss 3.1167 (3.7818)	Acc@1 43.750 (28.605)	Acc@5 62.500 (52.079)	Mem 38MB
+[2023-10-16 16:55:04 RepVGG-A1] (main.py 395): INFO Test: [1070/1563]	Time 0.103 (0.111)	Loss 4.7706 (3.7824)	Acc@1 15.625 (28.586)	Acc@5 46.875 (52.077)	Mem 38MB
+[2023-10-16 16:55:05 RepVGG-A1] (main.py 395): INFO Test: [1080/1563]	Time 0.097 (0.110)	Loss 3.7465 (3.7813)	Acc@1 34.375 (28.599)	Acc@5 53.125 (52.070)	Mem 38MB
+[2023-10-16 16:55:06 RepVGG-A1] (main.py 395): INFO Test: [1090/1563]	Time 0.103 (0.110)	Loss 3.4285 (3.7814)	Acc@1 28.125 (28.612)	Acc@5 56.250 (52.071)	Mem 38MB
+[2023-10-16 16:55:07 RepVGG-A1] (main.py 395): INFO Test: [1100/1563]	Time 0.104 (0.110)	Loss 3.2088 (3.7799)	Acc@1 37.500 (28.627)	Acc@5 62.500 (52.075)	Mem 38MB
+[2023-10-16 16:55:08 RepVGG-A1] (main.py 395): INFO Test: [1110/1563]	Time 0.099 (0.110)	Loss 4.7957 (3.7798)	Acc@1 25.000 (28.645)	Acc@5 40.625 (52.076)	Mem 38MB
+[2023-10-16 16:55:09 RepVGG-A1] (main.py 395): INFO Test: [1120/1563]	Time 0.091 (0.110)	Loss 3.1584 (3.7800)	Acc@1 28.125 (28.655)	Acc@5 62.500 (52.105)	Mem 38MB
+[2023-10-16 16:55:10 RepVGG-A1] (main.py 395): INFO Test: [1130/1563]	Time 0.097 (0.110)	Loss 3.6184 (3.7832)	Acc@1 28.125 (28.611)	Acc@5 59.375 (52.075)	Mem 38MB
+[2023-10-16 16:55:11 RepVGG-A1] (main.py 395): INFO Test: [1140/1563]	Time 0.091 (0.110)	Loss 4.1583 (3.7813)	Acc@1 21.875 (28.626)	Acc@5 50.000 (52.082)	Mem 38MB
+[2023-10-16 16:55:12 RepVGG-A1] (main.py 395): INFO Test: [1150/1563]	Time 0.095 (0.110)	Loss 4.0603 (3.7825)	Acc@1 18.750 (28.616)	Acc@5 53.125 (52.074)	Mem 38MB
+[2023-10-16 16:55:13 RepVGG-A1] (main.py 395): INFO Test: [1160/1563]	Time 0.102 (0.110)	Loss 3.3238 (3.7824)	Acc@1 37.500 (28.642)	Acc@5 65.625 (52.091)	Mem 38MB
+[2023-10-16 16:55:14 RepVGG-A1] (main.py 395): INFO Test: [1170/1563]	Time 0.097 (0.109)	Loss 3.7368 (3.7832)	Acc@1 28.125 (28.629)	Acc@5 50.000 (52.087)	Mem 38MB
+[2023-10-16 16:55:15 RepVGG-A1] (main.py 395): INFO Test: [1180/1563]	Time 0.103 (0.109)	Loss 3.1634 (3.7828)	Acc@1 34.375 (28.646)	Acc@5 59.375 (52.088)	Mem 38MB
+[2023-10-16 16:55:16 RepVGG-A1] (main.py 395): INFO Test: [1190/1563]	Time 0.094 (0.109)	Loss 2.8953 (3.7810)	Acc@1 50.000 (28.673)	Acc@5 65.625 (52.120)	Mem 38MB
+[2023-10-16 16:55:17 RepVGG-A1] (main.py 395): INFO Test: [1200/1563]	Time 0.095 (0.109)	Loss 3.3908 (3.7809)	Acc@1 21.875 (28.679)	Acc@5 56.250 (52.118)	Mem 38MB
+[2023-10-16 16:55:18 RepVGG-A1] (main.py 395): INFO Test: [1210/1563]	Time 0.092 (0.109)	Loss 4.3287 (3.7818)	Acc@1 31.250 (28.664)	Acc@5 50.000 (52.111)	Mem 38MB
+[2023-10-16 16:55:19 RepVGG-A1] (main.py 395): INFO Test: [1220/1563]	Time 0.098 (0.109)	Loss 3.1863 (3.7818)	Acc@1 34.375 (28.647)	Acc@5 62.500 (52.096)	Mem 38MB
+[2023-10-16 16:55:20 RepVGG-A1] (main.py 395): INFO Test: [1230/1563]	Time 0.098 (0.109)	Loss 3.4067 (3.7827)	Acc@1 34.375 (28.638)	Acc@5 40.625 (52.069)	Mem 38MB
+[2023-10-16 16:55:21 RepVGG-A1] (main.py 395): INFO Test: [1240/1563]	Time 0.095 (0.109)	Loss 3.9648 (3.7810)	Acc@1 31.250 (28.669)	Acc@5 46.875 (52.095)	Mem 38MB
+[2023-10-16 16:55:22 RepVGG-A1] (main.py 395): INFO Test: [1250/1563]	Time 0.091 (0.109)	Loss 3.9331 (3.7793)	Acc@1 25.000 (28.712)	Acc@5 50.000 (52.118)	Mem 38MB
+[2023-10-16 16:55:23 RepVGG-A1] (main.py 395): INFO Test: [1260/1563]	Time 0.095 (0.109)	Loss 3.6622 (3.7805)	Acc@1 46.875 (28.705)	Acc@5 62.500 (52.094)	Mem 38MB
+[2023-10-16 16:55:24 RepVGG-A1] (main.py 395): INFO Test: [1270/1563]	Time 0.091 (0.109)	Loss 4.3651 (3.7823)	Acc@1 18.750 (28.666)	Acc@5 43.750 (52.085)	Mem 38MB
+[2023-10-16 16:55:25 RepVGG-A1] (main.py 395): INFO Test: [1280/1563]	Time 0.095 (0.108)	Loss 4.5922 (3.7828)	Acc@1 21.875 (28.649)	Acc@5 46.875 (52.071)	Mem 38MB
+[2023-10-16 16:55:26 RepVGG-A1] (main.py 395): INFO Test: [1290/1563]	Time 0.097 (0.108)	Loss 4.4693 (3.7833)	Acc@1 21.875 (28.648)	Acc@5 40.625 (52.065)	Mem 38MB
+[2023-10-16 16:55:27 RepVGG-A1] (main.py 395): INFO Test: [1300/1563]	Time 0.096 (0.108)	Loss 3.2609 (3.7823)	Acc@1 28.125 (28.665)	Acc@5 59.375 (52.085)	Mem 38MB
+[2023-10-16 16:55:28 RepVGG-A1] (main.py 395): INFO Test: [1310/1563]	Time 0.096 (0.108)	Loss 4.3440 (3.7840)	Acc@1 21.875 (28.645)	Acc@5 43.750 (52.076)	Mem 38MB
+[2023-10-16 16:55:28 RepVGG-A1] (main.py 395): INFO Test: [1320/1563]	Time 0.097 (0.108)	Loss 4.6357 (3.7862)	Acc@1 15.625 (28.631)	Acc@5 34.375 (52.056)	Mem 38MB
+[2023-10-16 16:55:29 RepVGG-A1] (main.py 395): INFO Test: [1330/1563]	Time 0.097 (0.108)	Loss 3.3116 (3.7865)	Acc@1 37.500 (28.630)	Acc@5 56.250 (52.054)	Mem 38MB
+[2023-10-16 16:55:30 RepVGG-A1] (main.py 395): INFO Test: [1340/1563]	Time 0.095 (0.108)	Loss 3.5477 (3.7858)	Acc@1 37.500 (28.638)	Acc@5 59.375 (52.069)	Mem 38MB
+[2023-10-16 16:55:31 RepVGG-A1] (main.py 395): INFO Test: [1350/1563]	Time 0.098 (0.108)	Loss 4.1949 (3.7872)	Acc@1 25.000 (28.611)	Acc@5 59.375 (52.068)	Mem 38MB
+[2023-10-16 16:55:32 RepVGG-A1] (main.py 395): INFO Test: [1360/1563]	Time 0.096 (0.108)	Loss 4.4667 (3.7871)	Acc@1 28.125 (28.642)	Acc@5 43.750 (52.078)	Mem 38MB
+[2023-10-16 16:55:33 RepVGG-A1] (main.py 395): INFO Test: [1370/1563]	Time 0.094 (0.108)	Loss 4.2504 (3.7888)	Acc@1 25.000 (28.624)	Acc@5 40.625 (52.040)	Mem 38MB
+[2023-10-16 16:55:34 RepVGG-A1] (main.py 395): INFO Test: [1380/1563]	Time 0.102 (0.108)	Loss 3.6809 (3.7894)	Acc@1 34.375 (28.621)	Acc@5 56.250 (52.025)	Mem 38MB
+[2023-10-16 16:55:35 RepVGG-A1] (main.py 395): INFO Test: [1390/1563]	Time 0.094 (0.107)	Loss 4.2682 (3.7898)	Acc@1 15.625 (28.610)	Acc@5 43.750 (52.033)	Mem 38MB
+[2023-10-16 16:55:36 RepVGG-A1] (main.py 395): INFO Test: [1400/1563]	Time 0.090 (0.107)	Loss 3.8621 (3.7885)	Acc@1 21.875 (28.607)	Acc@5 59.375 (52.050)	Mem 38MB
+[2023-10-16 16:55:37 RepVGG-A1] (main.py 395): INFO Test: [1410/1563]	Time 0.097 (0.107)	Loss 5.1563 (3.7903)	Acc@1 12.500 (28.595)	Acc@5 31.250 (52.035)	Mem 38MB
+[2023-10-16 16:55:38 RepVGG-A1] (main.py 395): INFO Test: [1420/1563]	Time 0.099 (0.107)	Loss 3.1752 (3.7904)	Acc@1 34.375 (28.585)	Acc@5 53.125 (52.047)	Mem 38MB
+[2023-10-16 16:55:39 RepVGG-A1] (main.py 395): INFO Test: [1430/1563]	Time 0.093 (0.107)	Loss 3.9606 (3.7913)	Acc@1 28.125 (28.588)	Acc@5 53.125 (52.057)	Mem 38MB
+[2023-10-16 16:55:40 RepVGG-A1] (main.py 395): INFO Test: [1440/1563]	Time 0.100 (0.107)	Loss 2.7858 (3.7909)	Acc@1 46.875 (28.587)	Acc@5 59.375 (52.058)	Mem 38MB
+[2023-10-16 16:55:41 RepVGG-A1] (main.py 395): INFO Test: [1450/1563]	Time 0.093 (0.107)	Loss 3.7119 (3.7902)	Acc@1 31.250 (28.612)	Acc@5 59.375 (52.070)	Mem 38MB
+[2023-10-16 16:55:42 RepVGG-A1] (main.py 395): INFO Test: [1460/1563]	Time 0.096 (0.107)	Loss 3.0515 (3.7897)	Acc@1 40.625 (28.643)	Acc@5 65.625 (52.085)	Mem 38MB
+[2023-10-16 16:55:43 RepVGG-A1] (main.py 395): INFO Test: [1470/1563]	Time 0.096 (0.107)	Loss 3.2770 (3.7888)	Acc@1 31.250 (28.628)	Acc@5 56.250 (52.107)	Mem 38MB
+[2023-10-16 16:55:44 RepVGG-A1] (main.py 395): INFO Test: [1480/1563]	Time 0.096 (0.107)	Loss 4.0524 (3.7886)	Acc@1 25.000 (28.623)	Acc@5 37.500 (52.112)	Mem 38MB
+[2023-10-16 16:55:45 RepVGG-A1] (main.py 395): INFO Test: [1490/1563]	Time 0.093 (0.107)	Loss 3.5200 (3.7878)	Acc@1 34.375 (28.620)	Acc@5 53.125 (52.100)	Mem 38MB
+[2023-10-16 16:55:46 RepVGG-A1] (main.py 395): INFO Test: [1500/1563]	Time 0.100 (0.107)	Loss 4.5995 (3.7879)	Acc@1 12.500 (28.616)	Acc@5 43.750 (52.094)	Mem 38MB
+[2023-10-16 16:55:47 RepVGG-A1] (main.py 395): INFO Test: [1510/1563]	Time 0.102 (0.107)	Loss 3.9349 (3.7895)	Acc@1 34.375 (28.603)	Acc@5 56.250 (52.091)	Mem 38MB
+[2023-10-16 16:55:48 RepVGG-A1] (main.py 395): INFO Test: [1520/1563]	Time 0.090 (0.107)	Loss 4.0930 (3.7895)	Acc@1 21.875 (28.604)	Acc@5 50.000 (52.087)	Mem 38MB
+[2023-10-16 16:55:49 RepVGG-A1] (main.py 395): INFO Test: [1530/1563]	Time 0.090 (0.106)	Loss 3.9071 (3.7904)	Acc@1 28.125 (28.605)	Acc@5 50.000 (52.080)	Mem 38MB
+[2023-10-16 16:55:50 RepVGG-A1] (main.py 395): INFO Test: [1540/1563]	Time 0.095 (0.106)	Loss 3.7151 (3.7905)	Acc@1 31.250 (28.610)	Acc@5 56.250 (52.083)	Mem 38MB
+[2023-10-16 16:55:51 RepVGG-A1] (main.py 395): INFO Test: [1550/1563]	Time 0.091 (0.106)	Loss 3.0860 (3.7905)	Acc@1 40.625 (28.627)	Acc@5 56.250 (52.083)	Mem 38MB
+[2023-10-16 16:55:52 RepVGG-A1] (main.py 395): INFO Test: [1560/1563]	Time 0.092 (0.106)	Loss 3.7963 (3.7903)	Acc@1 21.875 (28.613)	Acc@5 50.000 (52.096)	Mem 38MB
+[2023-10-16 16:55:52 RepVGG-A1] (main.py 402): INFO  * Acc@1 28.608 Acc@5 52.084
+[2023-10-16 16:55:52 RepVGG-A1] (main.py 94): INFO Only eval. top-1 acc, top-5 acc, loss: 28.608, 52.084, 3.79058

@@ -1,0 +1,749 @@
+[2023-10-16 16:58:59 RepVGG-A1] (main.py 482): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.0
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: weak
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: false
+LOCAL_RANK: 2
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/qmaster
+PRINT_FREQ: 500
+SAVE_FREQ: 10
+SEED: 0
+TAG: qmaster
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.05
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 0
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.0001
+
+[2023-10-16 16:59:03 RepVGG-A1] (main.py 97): INFO Creating model:RepVGG-A1
+[2023-10-16 16:59:04 RepVGG-A1] (main.py 107): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-16 16:59:08 RepVGG-A1] (main.py 160): INFO number of params: 12796478
+[2023-10-16 16:59:08 RepVGG-A1] (main.py 197): INFO no checkpoint found in train_results/RepVGG-A1/qmaster, ignoring auto resume
+[2023-10-16 16:59:08 RepVGG-A1] (main.py 203): INFO Start training
+[2023-10-16 16:59:10 RepVGG-A1] (main.py 332): INFO Train: [0/300][0/10009]	eta 4:43:44 lr 0.050000	time 1.7009 (1.7009)	loss 3.3063 (3.3063)	grad_norm 154.6503 (154.6503)	mem 4855MB
+[2023-10-16 17:00:15 RepVGG-A1] (main.py 332): INFO Train: [0/300][500/10009]	eta 0:21:11 lr 0.050000	time 0.1288 (0.1337)	loss 4221.4590 (4371.7318)	grad_norm 52518.8838 (24165.7466)	mem 4855MB
+[2023-10-16 17:01:24 RepVGG-A1] (main.py 482): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.0
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: weak
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: false
+LOCAL_RANK: 2
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/qmaster
+PRINT_FREQ: 10
+SAVE_FREQ: 10
+SEED: 0
+TAG: qmaster
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.05
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 0
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.0001
+
+[2023-10-16 17:01:28 RepVGG-A1] (main.py 97): INFO Creating model:RepVGG-A1
+[2023-10-16 17:01:28 RepVGG-A1] (main.py 107): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-16 17:01:33 RepVGG-A1] (main.py 160): INFO number of params: 12796478
+[2023-10-16 17:01:33 RepVGG-A1] (main.py 197): INFO no checkpoint found in train_results/RepVGG-A1/qmaster, ignoring auto resume
+[2023-10-16 17:01:33 RepVGG-A1] (main.py 203): INFO Start training
+[2023-10-16 17:01:35 RepVGG-A1] (main.py 332): INFO Train: [0/300][0/10009]	eta 4:53:40 lr 0.050000	time 1.7605 (1.7605)	loss 3.3063 (3.3063)	grad_norm 154.6503 (154.6503)	mem 4855MB
+[2023-10-16 17:01:36 RepVGG-A1] (main.py 332): INFO Train: [0/300][10/10009]	eta 0:46:47 lr 0.050000	time 0.1304 (0.2808)	loss 7355.8042 (3229.4673)	grad_norm 1070.5059 (2151.0513)	mem 4855MB
+[2023-10-16 17:01:37 RepVGG-A1] (main.py 332): INFO Train: [0/300][20/10009]	eta 0:35:18 lr 0.050000	time 0.1388 (0.2121)	loss 5654.2690 (4729.5577)	grad_norm 1370.6907 (1634.2041)	mem 4855MB
+[2023-10-16 17:01:39 RepVGG-A1] (main.py 332): INFO Train: [0/300][30/10009]	eta 0:31:03 lr 0.050000	time 0.1337 (0.1867)	loss 5089.0801 (4976.2641)	grad_norm 607.3977 (1420.2412)	mem 4855MB
+[2023-10-16 17:01:40 RepVGG-A1] (main.py 332): INFO Train: [0/300][40/10009]	eta 0:28:56 lr 0.050000	time 0.1351 (0.1742)	loss 5057.0918 (5145.9126)	grad_norm 851.0770 (1315.2043)	mem 4855MB
+[2023-10-16 17:01:41 RepVGG-A1] (main.py 332): INFO Train: [0/300][50/10009]	eta 0:27:38 lr 0.050000	time 0.1320 (0.1666)	loss 4348.0898 (5061.4351)	grad_norm 1919.8141 (1302.7334)	mem 4855MB
+[2023-10-16 17:01:43 RepVGG-A1] (main.py 332): INFO Train: [0/300][60/10009]	eta 0:26:47 lr 0.050000	time 0.1429 (0.1616)	loss 4498.0835 (4989.2598)	grad_norm 3643.3702 (1548.0566)	mem 4855MB
+[2023-10-16 17:01:44 RepVGG-A1] (main.py 332): INFO Train: [0/300][70/10009]	eta 0:26:06 lr 0.050000	time 0.1280 (0.1576)	loss 4271.2334 (4936.2258)	grad_norm 5592.6847 (1994.2929)	mem 4855MB
+[2023-10-16 17:01:45 RepVGG-A1] (main.py 332): INFO Train: [0/300][80/10009]	eta 0:25:36 lr 0.050000	time 0.1306 (0.1548)	loss 4142.3369 (4895.8060)	grad_norm 7122.0324 (2553.7392)	mem 4855MB
+[2023-10-16 17:01:47 RepVGG-A1] (main.py 332): INFO Train: [0/300][90/10009]	eta 0:25:14 lr 0.050000	time 0.1337 (0.1527)	loss 4198.1089 (4845.4740)	grad_norm 7884.5181 (3101.7619)	mem 4855MB
+[2023-10-16 17:01:48 RepVGG-A1] (main.py 332): INFO Train: [0/300][100/10009]	eta 0:24:54 lr 0.050000	time 0.1264 (0.1509)	loss 5362.8154 (4833.2247)	grad_norm 8951.4875 (3630.0222)	mem 4855MB
+[2023-10-16 17:01:49 RepVGG-A1] (main.py 332): INFO Train: [0/300][110/10009]	eta 0:24:39 lr 0.050000	time 0.1314 (0.1495)	loss 4152.1426 (4819.1806)	grad_norm 10300.2290 (4175.4623)	mem 4855MB
+[2023-10-16 17:01:51 RepVGG-A1] (main.py 332): INFO Train: [0/300][120/10009]	eta 0:24:26 lr 0.050000	time 0.1356 (0.1483)	loss 4869.4077 (4797.8781)	grad_norm 11652.2664 (4743.5450)	mem 4855MB
+[2023-10-16 17:01:52 RepVGG-A1] (main.py 332): INFO Train: [0/300][130/10009]	eta 0:24:18 lr 0.050000	time 0.1309 (0.1476)	loss 5458.2788 (4807.6223)	grad_norm 12920.3154 (5324.8554)	mem 4855MB
+[2023-10-16 17:01:53 RepVGG-A1] (main.py 332): INFO Train: [0/300][140/10009]	eta 0:24:07 lr 0.050000	time 0.1368 (0.1467)	loss 4673.6650 (4800.3353)	grad_norm 13948.7734 (5905.6076)	mem 4855MB
+[2023-10-16 17:01:55 RepVGG-A1] (main.py 332): INFO Train: [0/300][150/10009]	eta 0:23:57 lr 0.050000	time 0.1274 (0.1458)	loss 4577.6128 (4781.2504)	grad_norm 14763.5972 (6468.0881)	mem 4855MB
+[2023-10-16 17:01:56 RepVGG-A1] (main.py 332): INFO Train: [0/300][160/10009]	eta 0:23:48 lr 0.050000	time 0.1385 (0.1451)	loss 4851.1929 (4778.1003)	grad_norm 15659.8197 (7013.2442)	mem 4855MB
+[2023-10-16 17:02:07 RepVGG-A1] (main.py 482): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.0
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: weak
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: false
+LOCAL_RANK: 2
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/qmaster
+PRINT_FREQ: 10
+SAVE_FREQ: 10
+SEED: 0
+TAG: qmaster
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 0
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.0001
+
+[2023-10-16 17:02:11 RepVGG-A1] (main.py 97): INFO Creating model:RepVGG-A1
+[2023-10-16 17:02:12 RepVGG-A1] (main.py 107): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-16 17:02:16 RepVGG-A1] (main.py 160): INFO number of params: 12796478
+[2023-10-16 17:02:16 RepVGG-A1] (main.py 197): INFO no checkpoint found in train_results/RepVGG-A1/qmaster, ignoring auto resume
+[2023-10-16 17:02:16 RepVGG-A1] (main.py 203): INFO Start training
+[2023-10-16 17:02:18 RepVGG-A1] (main.py 332): INFO Train: [0/300][0/10009]	eta 4:40:50 lr 0.005000	time 1.6836 (1.6836)	loss 3.3063 (3.3063)	grad_norm 154.6503 (154.6503)	mem 4855MB
+[2023-10-16 17:02:19 RepVGG-A1] (main.py 332): INFO Train: [0/300][10/10009]	eta 0:45:13 lr 0.005000	time 0.1205 (0.2714)	loss 988.6177 (489.2952)	grad_norm 1480.5084 (2732.7616)	mem 4855MB
+[2023-10-16 17:02:20 RepVGG-A1] (main.py 332): INFO Train: [0/300][20/10009]	eta 0:34:03 lr 0.005000	time 0.1240 (0.2046)	loss 2160.7051 (949.3426)	grad_norm 1395.3770 (2112.5448)	mem 4855MB
+[2023-10-16 17:02:22 RepVGG-A1] (main.py 332): INFO Train: [0/300][30/10009]	eta 0:30:02 lr 0.005000	time 0.1272 (0.1806)	loss 1838.9114 (1326.9416)	grad_norm 1357.4746 (1862.5277)	mem 4855MB
+[2023-10-16 17:02:23 RepVGG-A1] (main.py 332): INFO Train: [0/300][40/10009]	eta 0:27:59 lr 0.005000	time 0.1353 (0.1685)	loss 2813.0632 (1675.0039)	grad_norm 1336.6485 (1731.8392)	mem 4855MB
+[2023-10-16 17:02:24 RepVGG-A1] (main.py 332): INFO Train: [0/300][50/10009]	eta 0:26:44 lr 0.005000	time 0.1236 (0.1611)	loss 3493.5171 (1877.4195)	grad_norm 1332.8181 (1643.6022)	mem 4855MB
+[2023-10-16 17:02:26 RepVGG-A1] (main.py 332): INFO Train: [0/300][60/10009]	eta 0:25:53 lr 0.005000	time 0.1261 (0.1562)	loss 2481.3213 (2099.8946)	grad_norm 1331.9879 (1580.8937)	mem 4855MB
+[2023-10-16 17:02:27 RepVGG-A1] (main.py 332): INFO Train: [0/300][70/10009]	eta 0:25:17 lr 0.005000	time 0.1438 (0.1527)	loss 4319.1440 (2328.3139)	grad_norm 1330.1197 (1535.9794)	mem 4855MB
+[2023-10-16 17:02:28 RepVGG-A1] (main.py 332): INFO Train: [0/300][80/10009]	eta 0:24:48 lr 0.005000	time 0.1265 (0.1500)	loss 4329.0659 (2522.0272)	grad_norm 1334.3802 (1506.8138)	mem 4855MB
+[2023-10-16 17:02:30 RepVGG-A1] (main.py 332): INFO Train: [0/300][90/10009]	eta 0:24:26 lr 0.005000	time 0.1306 (0.1478)	loss 5100.0703 (2681.1587)	grad_norm 1336.7254 (1484.7779)	mem 4855MB
+[2023-10-16 17:02:31 RepVGG-A1] (main.py 332): INFO Train: [0/300][100/10009]	eta 0:24:07 lr 0.005000	time 0.1219 (0.1461)	loss 4113.8164 (2769.6521)	grad_norm 1357.4315 (1467.5626)	mem 4855MB
+[2023-10-16 17:02:32 RepVGG-A1] (main.py 332): INFO Train: [0/300][110/10009]	eta 0:23:53 lr 0.005000	time 0.1306 (0.1448)	loss 4049.8020 (2907.1312)	grad_norm 1338.1747 (1447.0514)	mem 4855MB
+[2023-10-16 17:02:34 RepVGG-A1] (main.py 332): INFO Train: [0/300][120/10009]	eta 0:23:40 lr 0.005000	time 0.1255 (0.1436)	loss 4544.5557 (3074.4775)	grad_norm 1398.4171 (1429.7562)	mem 4855MB
+[2023-10-16 17:02:35 RepVGG-A1] (main.py 332): INFO Train: [0/300][130/10009]	eta 0:23:29 lr 0.005000	time 0.1279 (0.1426)	loss 6023.7451 (3258.7283)	grad_norm 1402.9324 (1424.2864)	mem 4855MB
+[2023-10-16 17:02:36 RepVGG-A1] (main.py 332): INFO Train: [0/300][140/10009]	eta 0:23:20 lr 0.005000	time 0.1318 (0.1419)	loss 4881.3174 (3419.0514)	grad_norm 1125.6452 (1412.0005)	mem 4855MB
+[2023-10-16 17:02:37 RepVGG-A1] (main.py 332): INFO Train: [0/300][150/10009]	eta 0:23:10 lr 0.005000	time 0.1247 (0.1411)	loss 5777.7041 (3554.3355)	grad_norm 1457.9271 (1400.1868)	mem 4855MB
+[2023-10-16 17:02:39 RepVGG-A1] (main.py 332): INFO Train: [0/300][160/10009]	eta 0:23:03 lr 0.005000	time 0.1366 (0.1404)	loss 5601.3164 (3652.5397)	grad_norm 928.0259 (1385.1072)	mem 4855MB
+[2023-10-16 17:02:40 RepVGG-A1] (main.py 332): INFO Train: [0/300][170/10009]	eta 0:22:55 lr 0.005000	time 0.1212 (0.1398)	loss 6062.4155 (3744.1901)	grad_norm 1740.9606 (1380.3643)	mem 4855MB
+[2023-10-16 17:02:41 RepVGG-A1] (main.py 332): INFO Train: [0/300][180/10009]	eta 0:22:50 lr 0.005000	time 0.1360 (0.1394)	loss 7555.4482 (3835.9307)	grad_norm 3186.8053 (1442.6894)	mem 4855MB
+[2023-10-16 17:02:43 RepVGG-A1] (main.py 332): INFO Train: [0/300][190/10009]	eta 0:22:45 lr 0.005000	time 0.1288 (0.1391)	loss 5225.3037 (3934.9095)	grad_norm 4158.9831 (1565.0751)	mem 4855MB
+[2023-10-16 17:02:44 RepVGG-A1] (main.py 332): INFO Train: [0/300][200/10009]	eta 0:22:40 lr 0.005000	time 0.1249 (0.1387)	loss 4796.2324 (3999.3362)	grad_norm 6033.8706 (1745.3166)	mem 4855MB
+[2023-10-16 17:02:45 RepVGG-A1] (main.py 332): INFO Train: [0/300][210/10009]	eta 0:22:36 lr 0.005000	time 0.1282 (0.1384)	loss 6482.0142 (4101.2007)	grad_norm 7917.6027 (1997.6680)	mem 4855MB
+[2023-10-16 17:02:47 RepVGG-A1] (main.py 332): INFO Train: [0/300][220/10009]	eta 0:22:31 lr 0.005000	time 0.1267 (0.1380)	loss 4983.2876 (4170.9068)	grad_norm 9793.2516 (2312.2456)	mem 4855MB
+[2023-10-16 17:02:48 RepVGG-A1] (main.py 332): INFO Train: [0/300][230/10009]	eta 0:22:26 lr 0.005000	time 0.1273 (0.1377)	loss 5662.6001 (4224.9930)	grad_norm 11645.0769 (2680.3198)	mem 4855MB
+[2023-10-16 17:02:49 RepVGG-A1] (main.py 332): INFO Train: [0/300][240/10009]	eta 0:22:22 lr 0.005000	time 0.1348 (0.1374)	loss 5396.1064 (4270.5510)	grad_norm 13471.1611 (3094.1191)	mem 4855MB
+[2023-10-16 17:02:51 RepVGG-A1] (main.py 332): INFO Train: [0/300][250/10009]	eta 0:22:17 lr 0.005000	time 0.1260 (0.1370)	loss 5739.8555 (4318.0108)	grad_norm 15124.7941 (3546.2407)	mem 4855MB
+[2023-10-16 17:02:52 RepVGG-A1] (main.py 332): INFO Train: [0/300][260/10009]	eta 0:22:12 lr 0.005000	time 0.1269 (0.1367)	loss 6813.6924 (4372.1032)	grad_norm 16794.8499 (4024.4089)	mem 4855MB
+[2023-10-16 17:02:53 RepVGG-A1] (main.py 332): INFO Train: [0/300][270/10009]	eta 0:22:09 lr 0.005000	time 0.1338 (0.1365)	loss 4808.4277 (4411.7653)	grad_norm 18434.3399 (4529.1815)	mem 4855MB
+[2023-10-16 17:02:54 RepVGG-A1] (main.py 332): INFO Train: [0/300][280/10009]	eta 0:22:06 lr 0.005000	time 0.1240 (0.1363)	loss 5043.9180 (4456.1490)	grad_norm 19987.5819 (5054.7171)	mem 4855MB
+[2023-10-16 17:02:56 RepVGG-A1] (main.py 332): INFO Train: [0/300][290/10009]	eta 0:22:03 lr 0.005000	time 0.1329 (0.1361)	loss 5915.6631 (4488.6516)	grad_norm 21447.7733 (5595.6894)	mem 4855MB
+[2023-10-16 17:02:57 RepVGG-A1] (main.py 332): INFO Train: [0/300][300/10009]	eta 0:21:59 lr 0.005000	time 0.1303 (0.1359)	loss 5508.7583 (4536.5511)	grad_norm 22827.1809 (6147.7541)	mem 4855MB
+[2023-10-16 17:02:58 RepVGG-A1] (main.py 332): INFO Train: [0/300][310/10009]	eta 0:21:56 lr 0.005000	time 0.1311 (0.1357)	loss 7653.2729 (4577.5092)	grad_norm 24138.4524 (6707.4159)	mem 4855MB
+[2023-10-16 17:03:00 RepVGG-A1] (main.py 332): INFO Train: [0/300][320/10009]	eta 0:21:53 lr 0.005000	time 0.1359 (0.1356)	loss 6834.1484 (4616.7270)	grad_norm 25398.9099 (7272.1341)	mem 4855MB
+[2023-10-16 17:03:01 RepVGG-A1] (main.py 332): INFO Train: [0/300][330/10009]	eta 0:21:50 lr 0.005000	time 0.1242 (0.1354)	loss 3980.3613 (4631.8647)	grad_norm 26626.3924 (7840.2441)	mem 4855MB
+[2023-10-16 17:03:02 RepVGG-A1] (main.py 332): INFO Train: [0/300][340/10009]	eta 0:21:48 lr 0.005000	time 0.1308 (0.1354)	loss 5784.7734 (4660.6005)	grad_norm 27833.5925 (8410.6841)	mem 4855MB
+[2023-10-16 17:03:04 RepVGG-A1] (main.py 332): INFO Train: [0/300][350/10009]	eta 0:21:45 lr 0.005000	time 0.1235 (0.1352)	loss 5039.8652 (4675.9532)	grad_norm 29032.5640 (8982.8524)	mem 4855MB
+[2023-10-16 17:03:05 RepVGG-A1] (main.py 332): INFO Train: [0/300][360/10009]	eta 0:21:43 lr 0.005000	time 0.1352 (0.1351)	loss 5179.2275 (4701.9934)	grad_norm 30233.1718 (9556.5340)	mem 4855MB
+[2023-10-16 17:03:06 RepVGG-A1] (main.py 332): INFO Train: [0/300][370/10009]	eta 0:21:40 lr 0.005000	time 0.1372 (0.1349)	loss 5526.8730 (4722.3921)	grad_norm 31436.6686 (10131.6851)	mem 4855MB
+[2023-10-16 17:03:08 RepVGG-A1] (main.py 332): INFO Train: [0/300][380/10009]	eta 0:21:38 lr 0.005000	time 0.1308 (0.1348)	loss 3922.9458 (4749.0483)	grad_norm 32646.3355 (10708.3184)	mem 4855MB
+[2023-10-16 17:03:09 RepVGG-A1] (main.py 332): INFO Train: [0/300][390/10009]	eta 0:21:35 lr 0.005000	time 0.1283 (0.1347)	loss 6448.9316 (4757.7421)	grad_norm 33862.2288 (11286.4737)	mem 4855MB
+[2023-10-16 17:03:10 RepVGG-A1] (main.py 332): INFO Train: [0/300][400/10009]	eta 0:21:33 lr 0.005000	time 0.1314 (0.1346)	loss 4163.3809 (4770.8804)	grad_norm 35086.6434 (11866.2404)	mem 4855MB
+[2023-10-16 17:03:11 RepVGG-A1] (main.py 332): INFO Train: [0/300][410/10009]	eta 0:21:31 lr 0.005000	time 0.1373 (0.1345)	loss 4981.6118 (4778.0687)	grad_norm 36317.2185 (12447.6625)	mem 4855MB
+[2023-10-16 17:03:13 RepVGG-A1] (main.py 332): INFO Train: [0/300][420/10009]	eta 0:21:29 lr 0.005000	time 0.1388 (0.1344)	loss 6017.0977 (4798.8001)	grad_norm 37554.7935 (13030.7706)	mem 4855MB
+[2023-10-16 17:03:14 RepVGG-A1] (main.py 332): INFO Train: [0/300][430/10009]	eta 0:21:27 lr 0.005000	time 0.1200 (0.1344)	loss 5436.5278 (4811.4346)	grad_norm 38798.9497 (13615.6510)	mem 4855MB
+[2023-10-16 17:03:15 RepVGG-A1] (main.py 332): INFO Train: [0/300][440/10009]	eta 0:21:24 lr 0.005000	time 0.1280 (0.1343)	loss 3214.7637 (4822.0967)	grad_norm 40053.6334 (14202.3417)	mem 4855MB
+[2023-10-16 17:03:17 RepVGG-A1] (main.py 332): INFO Train: [0/300][450/10009]	eta 0:21:22 lr 0.005000	time 0.1322 (0.1342)	loss 4503.9204 (4834.8791)	grad_norm 41314.7393 (14790.9152)	mem 4855MB
+[2023-10-16 17:03:18 RepVGG-A1] (main.py 332): INFO Train: [0/300][460/10009]	eta 0:21:20 lr 0.005000	time 0.1283 (0.1341)	loss 6751.9385 (4850.6368)	grad_norm 42581.1185 (15381.3539)	mem 4855MB
+[2023-10-16 17:03:19 RepVGG-A1] (main.py 332): INFO Train: [0/300][470/10009]	eta 0:21:18 lr 0.005000	time 0.1201 (0.1340)	loss 5551.3887 (4854.7303)	grad_norm 43853.5564 (15973.7091)	mem 4855MB
+[2023-10-16 17:03:21 RepVGG-A1] (main.py 332): INFO Train: [0/300][480/10009]	eta 0:21:16 lr 0.005000	time 0.1336 (0.1340)	loss 6333.2949 (4868.7658)	grad_norm 45133.2951 (16567.9623)	mem 4855MB
+[2023-10-16 17:03:22 RepVGG-A1] (main.py 332): INFO Train: [0/300][490/10009]	eta 0:21:14 lr 0.005000	time 0.1309 (0.1339)	loss 6207.6792 (4876.5734)	grad_norm 46414.6079 (17164.0839)	mem 4855MB
+[2023-10-16 17:03:23 RepVGG-A1] (main.py 332): INFO Train: [0/300][500/10009]	eta 0:21:12 lr 0.005000	time 0.1233 (0.1338)	loss 5603.0737 (4893.1286)	grad_norm 47704.2761 (17762.0656)	mem 4855MB
+[2023-10-16 17:03:24 RepVGG-A1] (main.py 332): INFO Train: [0/300][510/10009]	eta 0:21:10 lr 0.005000	time 0.1311 (0.1337)	loss 4689.2075 (4912.9589)	grad_norm 48999.4446 (18361.9472)	mem 4855MB
+[2023-10-16 17:03:26 RepVGG-A1] (main.py 332): INFO Train: [0/300][520/10009]	eta 0:21:08 lr 0.005000	time 0.1387 (0.1337)	loss 4689.2803 (4918.3450)	grad_norm 50297.5148 (18963.6942)	mem 4855MB
+[2023-10-16 17:03:27 RepVGG-A1] (main.py 332): INFO Train: [0/300][530/10009]	eta 0:21:06 lr 0.005000	time 0.1238 (0.1336)	loss 3832.3091 (4929.0907)	grad_norm 51598.0154 (19567.2436)	mem 4855MB
+[2023-10-16 17:03:28 RepVGG-A1] (main.py 332): INFO Train: [0/300][540/10009]	eta 0:21:04 lr 0.005000	time 0.1326 (0.1336)	loss 6670.5801 (4948.0867)	grad_norm 52903.8441 (20172.5723)	mem 4855MB
+[2023-10-16 17:03:30 RepVGG-A1] (main.py 332): INFO Train: [0/300][550/10009]	eta 0:21:02 lr 0.005000	time 0.1209 (0.1335)	loss 5987.1353 (4961.5105)	grad_norm 54214.1143 (20779.6805)	mem 4855MB
+[2023-10-16 17:03:31 RepVGG-A1] (main.py 332): INFO Train: [0/300][560/10009]	eta 0:21:01 lr 0.005000	time 0.1281 (0.1335)	loss 6214.7231 (4973.3005)	grad_norm 55527.4782 (21388.5317)	mem 4855MB
+[2023-10-16 17:03:32 RepVGG-A1] (main.py 332): INFO Train: [0/300][570/10009]	eta 0:20:59 lr 0.005000	time 0.1284 (0.1334)	loss 4202.8208 (4982.4682)	grad_norm 56839.4863 (21999.0394)	mem 4855MB
+[2023-10-16 17:03:34 RepVGG-A1] (main.py 332): INFO Train: [0/300][580/10009]	eta 0:20:57 lr 0.005000	time 0.1314 (0.1334)	loss 3970.1616 (4999.3985)	grad_norm 58156.5102 (22611.1635)	mem 4855MB
+[2023-10-16 17:03:35 RepVGG-A1] (main.py 332): INFO Train: [0/300][590/10009]	eta 0:20:55 lr 0.005000	time 0.1274 (0.1333)	loss 5707.8779 (5014.4238)	grad_norm 59474.3662 (23224.8600)	mem 4855MB
+[2023-10-16 17:03:36 RepVGG-A1] (main.py 332): INFO Train: [0/300][600/10009]	eta 0:20:53 lr 0.005000	time 0.1326 (0.1332)	loss 4706.5977 (5022.0785)	grad_norm 60795.7765 (23840.0911)	mem 4855MB
+[2023-10-16 17:03:38 RepVGG-A1] (main.py 332): INFO Train: [0/300][610/10009]	eta 0:20:51 lr 0.005000	time 0.1354 (0.1332)	loss 6164.5762 (5033.8947)	grad_norm 62118.6985 (24456.8432)	mem 4855MB
+[2023-10-16 17:03:39 RepVGG-A1] (main.py 332): INFO Train: [0/300][620/10009]	eta 0:20:49 lr 0.005000	time 0.1313 (0.1331)	loss 6033.5117 (5038.8367)	grad_norm 63444.3744 (25075.0436)	mem 4855MB
+[2023-10-16 17:03:40 RepVGG-A1] (main.py 332): INFO Train: [0/300][630/10009]	eta 0:20:48 lr 0.005000	time 0.1280 (0.1331)	loss 6326.1880 (5047.5962)	grad_norm 64769.6597 (25694.6682)	mem 4855MB
+[2023-10-16 17:03:41 RepVGG-A1] (main.py 332): INFO Train: [0/300][640/10009]	eta 0:20:46 lr 0.005000	time 0.1276 (0.1330)	loss 4728.2520 (5048.1820)	grad_norm 66096.5272 (26315.6295)	mem 4855MB
+[2023-10-16 17:03:43 RepVGG-A1] (main.py 332): INFO Train: [0/300][650/10009]	eta 0:20:44 lr 0.005000	time 0.1386 (0.1330)	loss 6306.5234 (5050.8149)	grad_norm 67428.5000 (26937.9579)	mem 4855MB
+[2023-10-16 17:03:44 RepVGG-A1] (main.py 332): INFO Train: [0/300][660/10009]	eta 0:20:42 lr 0.005000	time 0.1231 (0.1329)	loss 5912.8770 (5059.3822)	grad_norm 68762.5276 (27561.6206)	mem 4855MB
+[2023-10-16 17:03:45 RepVGG-A1] (main.py 332): INFO Train: [0/300][670/10009]	eta 0:20:40 lr 0.005000	time 0.1317 (0.1329)	loss 5108.5806 (5063.3283)	grad_norm 70097.4847 (28186.5913)	mem 4855MB
+[2023-10-16 17:03:47 RepVGG-A1] (main.py 332): INFO Train: [0/300][680/10009]	eta 0:20:39 lr 0.005000	time 0.1298 (0.1328)	loss 5635.4907 (5071.7693)	grad_norm 71430.4498 (28812.7918)	mem 4855MB
+[2023-10-16 17:03:48 RepVGG-A1] (main.py 332): INFO Train: [0/300][690/10009]	eta 0:20:37 lr 0.005000	time 0.1344 (0.1328)	loss 6614.7637 (5079.9303)	grad_norm 72765.5633 (29440.1842)	mem 4855MB

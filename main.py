@@ -28,6 +28,20 @@ try:
 except ImportError:
     amp = None
 
+def load_checkpoint(model, ckpt_path):
+    checkpoint = torch.load(ckpt_path)
+    if 'model' in checkpoint:
+        checkpoint = checkpoint['model']
+    if 'state_dict' in checkpoint:
+        checkpoint = checkpoint['state_dict']
+    ckpt = {}
+    for k, v in checkpoint.items():
+        if k.startswith('module.'):
+            ckpt[k[7:]] = v
+        else:
+            ckpt[k] = v
+    model.load_state_dict(ckpt)
+
 def parse_option():
     parser = argparse.ArgumentParser('RepOpt-VGG training script built on the codebase of Swin Transformer', add_help=False)
     parser.add_argument(
@@ -53,11 +67,12 @@ def parse_option():
                         help="whether to use gradient checkpointing to save memory")
     parser.add_argument('--amp-opt-level', type=str, default='O0', choices=['O0', 'O1', 'O2'],  #TODO Note: use amp if you have it
                         help='mixed precision opt level, if O0, no amp is used')
-    parser.add_argument('--output', default='/your/path/to/save/dir', type=str, metavar='PATH',
+    parser.add_argument('--output', default='train_results', type=str, metavar='PATH',
                         help='root of output folder, the full path is <output>/<model_name>/<tag> (default: output)')
     parser.add_argument('--tag', help='tag of experiment')
     parser.add_argument('--eval', action='store_true', help='Perform evaluation only')
     parser.add_argument('--throughput', action='store_true', help='Test throughput only')
+    parser.add_argument('--weights', type=str, help='weight file for evaluation')
 
     # distributed training
     parser.add_argument("--local_rank", type=int, default=0, help='local rank for DistributedDataParallel')
@@ -69,29 +84,102 @@ def parse_option():
     return args, config
 
 
+def repvgg_model_convert(model:torch.nn.Module, do_copy=True):
+    if do_copy:
+        model = copy.deepcopy(model)
+    for module in model.modules():
+        if hasattr(module, 'switch_to_deploy'):
+            module.switch_to_deploy()
+    # if save_path is not None:
+    #     torch.save(model.state_dict(), save_path)
+    return model
 
 
 
-def main(config):
+def main(args, config):
     dataset_train, dataset_val, data_loader_train, data_loader_val, mixup_fn = build_loader(config)
-
+    
     logger.info(f"Creating model:{config.MODEL.ARCH}")
 
     model = create_RepVGGplus_by_name(config.MODEL.ARCH, deploy=False, use_checkpoint=args.use_checkpoint)
+    
+    # # # if eval with, torch comment out
+    if config.EVAL_MODE:
+        acc1, acc5, loss = validate(config, data_loader_val, model, eval_mode=True, weights=args.weights)
+        logger.info(f"Only eval. top-1 acc, top-5 acc, loss: {acc1:.3f}, {acc5:.3f}, {loss:.5f}")
+        return
+    
+    # make model same as inference (jbj)
+    model.load_state_dict(torch.load(config.MODEL.ARCH + ".pth"))
+    model = repvgg_model_convert(model)
+    
     optimizer = build_optimizer(config, model)
-
+    
     logger.info(str(model))
     model.cuda()
+    
+    from dl_adquantizer import DXQmasterManager
+    
+    # device = torch.device("cpu")
+    # model = model.to(device)
+    model.eval()
+    manager = DXQmasterManager(model, torch.randn(1, 3, 320, 320).cuda(), print_graph=True)
+    manager.prepare_model_for_calib()
+
+    # - calibration - #
+    model.eval()
+    CALNUM = 1
+    cnt = 0
+    with torch.no_grad():
+        for iter, (images, targets) in enumerate(data_loader_val):
+            images = images.cuda(non_blocking=True)
+            for b in range(len(images)):
+                cnt += 1
+                one_img = images[b:b+1]
+                
+                model(one_img)
+                
+                if cnt % 10 == 0:
+                    print(f"clibration cnt: {cnt}")
+                
+                if cnt == CALNUM:
+                    break
+            if cnt == CALNUM:
+                break
+    
+    # - calibration end - # -
+    manager.prepare_model_for_train(reparam=False)
+    
+    # # eval with torch
+    # if config.EVAL_MODE:
+    #     acc1, acc5, loss = validate(config, data_loader_val, model, eval_mode=True, weights=args.weights)
+    #     logger.info(f"Only eval. top-1 acc, top-5 acc, loss: {acc1:.3f}, {acc5:.3f}, {loss:.5f}")
+    #     return
+    
+    # # qlite export
+    # save_path = "qlite_test.onnx"
+    # manager.compile(save_path=save_path)
+    # print(f"exported to {save_path}")
+    # exit()
+    
+    # qmaster export
+    weight_path = "train_results/RepVGG-A1/qmaster4/best_ckpt.pth"
+    # model.load_state_dict(torch.load(weight_path)["ema"])
+    load_checkpoint(model, weight_path)
+    save_path = "qmaster4.onnx"
+    manager.compile(save_path=save_path)
+    print(f"exported to {save_path}")
+    exit()
 
     if torch.cuda.device_count() > 1:
-        if config.AMP_OPT_LEVEL != "O0":
-            model, optimizer = amp.initialize(model, optimizer, opt_level=config.AMP_OPT_LEVEL)
+        # if config.AMP_OPT_LEVEL != "O0":
+        #     model, optimizer = amp.initialize(model, optimizer, opt_level=config.AMP_OPT_LEVEL)
         model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.LOCAL_RANK],
-                                                          broadcast_buffers=False)
+                                                          broadcast_buffers=False, find_unused_parameters=True)
         model_without_ddp = model.module
     else:
-        if config.AMP_OPT_LEVEL != "O0":
-            model, optimizer = amp.initialize(model, optimizer, opt_level=config.AMP_OPT_LEVEL)
+        # if config.AMP_OPT_LEVEL != "O0":
+        #     model, optimizer = amp.initialize(model, optimizer, opt_level=config.AMP_OPT_LEVEL)
         model_without_ddp = model
 
     n_parameters = sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -100,15 +188,9 @@ def main(config):
         flops = model_without_ddp.flops()
         logger.info(f"number of GFLOPs: {flops / 1e9}")
 
-    if config.THROUGHPUT_MODE:
-        throughput(data_loader_val, model, logger)
-        return
-
-    if config.EVAL_MODE:
-        load_weights(model, config.MODEL.RESUME)
-        acc1, acc5, loss = validate(config, data_loader_val, model)
-        logger.info(f"Only eval. top-1 acc, top-5 acc, loss: {acc1:.3f}, {acc5:.3f}, {loss:.5f}")
-        return
+    # if config.THROUGHPUT_MODE:
+    #     throughput(data_loader_val, model, logger)
+    #     return
 
     lr_scheduler = build_scheduler(config, optimizer, len(data_loader_train))
 
@@ -140,8 +222,8 @@ def main(config):
         else:
             logger.info(f'no checkpoint found in {config.OUTPUT}, ignoring auto resume')
 
-    if (not config.THROUGHPUT_MODE) and config.MODEL.RESUME:
-        max_accuracy = load_checkpoint(config, model_without_ddp, optimizer, lr_scheduler, logger, model_ema=model_ema)
+    # if (not config.THROUGHPUT_MODE) and config.MODEL.RESUME:
+    #     max_accuracy = load_checkpoint(config, model_without_ddp, optimizer, lr_scheduler, logger, model_ema=model_ema)
 
 
     logger.info("Start training")
@@ -219,19 +301,20 @@ def train_one_epoch(config, model, criterion, data_loader, optimizer, epoch, mix
         if config.TRAIN.ACCUMULATION_STEPS > 1:
 
             loss = loss / config.TRAIN.ACCUMULATION_STEPS
-            if config.AMP_OPT_LEVEL != "O0":
-                with amp.scale_loss(loss, optimizer) as scaled_loss:
-                    scaled_loss.backward()
-                if config.TRAIN.CLIP_GRAD:
-                    grad_norm = torch.nn.utils.clip_grad_norm_(amp.master_params(optimizer), config.TRAIN.CLIP_GRAD)
-                else:
-                    grad_norm = get_grad_norm(amp.master_params(optimizer))
+            # if config.AMP_OPT_LEVEL != "O0":
+            #     with amp.scale_loss(loss, optimizer) as scaled_loss:
+            #         scaled_loss.backward()
+            #     if config.TRAIN.CLIP_GRAD:
+            #         grad_norm = torch.nn.utils.clip_grad_norm_(amp.master_params(optimizer), config.TRAIN.CLIP_GRAD)
+            #     else:
+            #         grad_norm = get_grad_norm(amp.master_params(optimizer))
+            # else:
+            loss.backward()
+            if config.TRAIN.CLIP_GRAD:
+                grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), config.TRAIN.CLIP_GRAD)
             else:
-                loss.backward()
-                if config.TRAIN.CLIP_GRAD:
-                    grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), config.TRAIN.CLIP_GRAD)
-                else:
-                    grad_norm = get_grad_norm(model.parameters())
+                grad_norm = get_grad_norm(model.parameters())
+                
             if (idx + 1) % config.TRAIN.ACCUMULATION_STEPS == 0:
                 optimizer.step()
                 optimizer.zero_grad()
@@ -240,19 +323,20 @@ def train_one_epoch(config, model, criterion, data_loader, optimizer, epoch, mix
         else:
 
             optimizer.zero_grad()
-            if config.AMP_OPT_LEVEL != "O0":
-                with amp.scale_loss(loss, optimizer) as scaled_loss:
-                    scaled_loss.backward()
-                if config.TRAIN.CLIP_GRAD:
-                    grad_norm = torch.nn.utils.clip_grad_norm_(amp.master_params(optimizer), config.TRAIN.CLIP_GRAD)
-                else:
-                    grad_norm = get_grad_norm(amp.master_params(optimizer))
+            # if config.AMP_OPT_LEVEL != "O0":
+            #     with amp.scale_loss(loss, optimizer) as scaled_loss:
+            #         scaled_loss.backward()
+            #     if config.TRAIN.CLIP_GRAD:
+            #         grad_norm = torch.nn.utils.clip_grad_norm_(amp.master_params(optimizer), config.TRAIN.CLIP_GRAD)
+            #     else:
+            #         grad_norm = get_grad_norm(amp.master_params(optimizer))
+            # else:
+            loss.backward()
+            if config.TRAIN.CLIP_GRAD:
+                grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), config.TRAIN.CLIP_GRAD)
             else:
-                loss.backward()
-                if config.TRAIN.CLIP_GRAD:
-                    grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), config.TRAIN.CLIP_GRAD)
-                else:
-                    grad_norm = get_grad_norm(model.parameters())
+                grad_norm = get_grad_norm(model.parameters())
+                
             optimizer.step()
             lr_scheduler.step_update(epoch * num_steps + idx)
 
@@ -283,9 +367,22 @@ def train_one_epoch(config, model, criterion, data_loader, optimizer, epoch, mix
 
 
 @torch.no_grad()
-def validate(config, data_loader, model):
+def validate(config, data_loader, model, eval_mode=False, weights=None):
+    if weights is not None:
+        if weights.endswith("onnx"):
+            import onnx
+            from dx_com.onnx.util import proto2session
+            model = onnx.load(args.weights)
+            model = proto2session(model, gpu_mode=True)
+        elif weights.endswith("pth"):
+            load_checkpoint(model, weights)
+            # torch.onnx.export(model, torch.randn((1,3,320,320)).cuda(), "SQ_model_beforesim.onnx")
+            # exit()
+            model.eval()
+            
     criterion = torch.nn.CrossEntropyLoss()
-    model.eval()
+    if not eval_mode:
+        model.eval()
 
     batch_time = AverageMeter()
     loss_meter = AverageMeter()
@@ -297,8 +394,19 @@ def validate(config, data_loader, model):
         images = images.cuda(non_blocking=True)
         target = target.cuda(non_blocking=True)
 
-        # compute output
-        output = model(images)
+        if weights.endswith("onnx"):
+            # compute output
+            outputs = []
+            with torch.no_grad():
+                for b in range(len(images)):
+                    one_img = images[b:b+1].detach().cpu().numpy()
+                    output = model.run(None, input_feed={"onnx::Sub_0":one_img})
+                    outputs.append(torch.tensor(output[0]))
+            output = torch.cat(outputs, dim=0).cuda()
+        else:
+            # compute output
+            output = model(images)
+        
 
         #   =============================== deepsup part
         if type(output) is dict:
@@ -411,4 +519,4 @@ if __name__ == '__main__':
     # print config
     logger.info(config.dump())
 
-    main(config)
+    main(args, config)

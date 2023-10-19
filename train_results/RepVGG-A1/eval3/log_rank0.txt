@@ -1,0 +1,1854 @@
+[2023-10-18 19:22:12 RepVGG-A1] (main.py 507): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-18 19:22:12 RepVGG-A1] (main.py 510): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 100
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-18 19:22:15 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-18 19:23:09 RepVGG-A1] (main.py 512): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-18 19:23:09 RepVGG-A1] (main.py 515): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 100
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-18 19:23:12 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-18 19:23:13 RepVGG-A1] (main.py 117): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-18 19:24:28 RepVGG-A1] (main.py 512): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-18 19:24:28 RepVGG-A1] (main.py 515): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 100
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-18 19:24:30 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-18 19:24:31 RepVGG-A1] (main.py 117): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-18 19:26:12 RepVGG-A1] (main.py 514): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-18 19:26:12 RepVGG-A1] (main.py 517): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 100
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-18 19:26:14 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-18 19:26:15 RepVGG-A1] (main.py 117): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-18 19:27:20 RepVGG-A1] (main.py 514): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-18 19:27:20 RepVGG-A1] (main.py 517): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 100
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-18 19:27:23 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-18 19:27:23 RepVGG-A1] (main.py 117): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-18 19:27:28 RepVGG-A1] (main.py 430): INFO Test: [0/1563]	Time 1.291 (1.291)	Loss 1.4212 (1.4212)	Acc@1 65.625 (65.625)	Acc@5 84.375 (84.375)	Mem 1813MB
+[2023-10-18 19:27:31 RepVGG-A1] (main.py 430): INFO Test: [100/1563]	Time 0.018 (0.044)	Loss 1.1983 (1.1651)	Acc@1 75.000 (74.752)	Acc@5 90.625 (91.739)	Mem 1813MB
+[2023-10-18 19:27:35 RepVGG-A1] (main.py 430): INFO Test: [200/1563]	Time 0.018 (0.039)	Loss 1.0299 (1.1856)	Acc@1 68.750 (73.943)	Acc@5 96.875 (91.589)	Mem 1813MB
+[2023-10-18 19:27:38 RepVGG-A1] (main.py 430): INFO Test: [300/1563]	Time 0.091 (0.037)	Loss 1.5927 (1.1801)	Acc@1 65.625 (74.190)	Acc@5 87.500 (91.528)	Mem 1813MB
+[2023-10-18 19:27:41 RepVGG-A1] (main.py 430): INFO Test: [400/1563]	Time 0.018 (0.036)	Loss 0.7943 (1.1721)	Acc@1 87.500 (74.291)	Acc@5 96.875 (91.716)	Mem 1813MB
+[2023-10-18 19:27:45 RepVGG-A1] (main.py 430): INFO Test: [500/1563]	Time 0.074 (0.036)	Loss 0.9661 (1.1559)	Acc@1 75.000 (74.576)	Acc@5 96.875 (91.897)	Mem 1813MB
+[2023-10-18 19:27:48 RepVGG-A1] (main.py 430): INFO Test: [600/1563]	Time 0.018 (0.035)	Loss 0.8277 (1.1535)	Acc@1 81.250 (74.678)	Acc@5 96.875 (91.925)	Mem 1813MB
+[2023-10-18 19:27:51 RepVGG-A1] (main.py 430): INFO Test: [700/1563]	Time 0.019 (0.035)	Loss 1.2979 (1.1478)	Acc@1 68.750 (74.844)	Acc@5 87.500 (92.025)	Mem 1813MB
+[2023-10-18 19:27:54 RepVGG-A1] (main.py 430): INFO Test: [800/1563]	Time 0.018 (0.034)	Loss 0.7056 (1.1433)	Acc@1 81.250 (75.000)	Acc@5 96.875 (92.049)	Mem 1813MB
+[2023-10-18 19:28:07 RepVGG-A1] (main.py 513): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-18 19:28:07 RepVGG-A1] (main.py 516): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 10
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-18 19:28:10 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-18 19:28:11 RepVGG-A1] (main.py 117): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-18 19:28:16 RepVGG-A1] (main.py 429): INFO Test: [0/1563]	Time 1.367 (1.367)	Loss 1.4212 (1.4212)	Acc@1 65.625 (65.625)	Acc@5 84.375 (84.375)	Mem 1813MB
+[2023-10-18 19:28:16 RepVGG-A1] (main.py 429): INFO Test: [10/1563]	Time 0.018 (0.146)	Loss 1.2696 (1.1890)	Acc@1 71.875 (74.432)	Acc@5 90.625 (90.057)	Mem 1813MB
+[2023-10-18 19:28:16 RepVGG-A1] (main.py 429): INFO Test: [20/1563]	Time 0.019 (0.085)	Loss 1.5574 (1.1767)	Acc@1 65.625 (75.298)	Acc@5 96.875 (90.625)	Mem 1813MB
+[2023-10-18 19:28:16 RepVGG-A1] (main.py 429): INFO Test: [30/1563]	Time 0.026 (0.066)	Loss 1.2265 (1.1913)	Acc@1 65.625 (74.395)	Acc@5 93.750 (91.129)	Mem 1813MB
+[2023-10-18 19:28:17 RepVGG-A1] (main.py 429): INFO Test: [40/1563]	Time 0.018 (0.059)	Loss 1.2308 (1.1767)	Acc@1 84.375 (74.771)	Acc@5 87.500 (91.006)	Mem 1813MB
+[2023-10-18 19:28:17 RepVGG-A1] (main.py 429): INFO Test: [50/1563]	Time 0.018 (0.056)	Loss 1.2140 (1.1623)	Acc@1 62.500 (75.000)	Acc@5 90.625 (91.176)	Mem 1813MB
+[2023-10-18 19:28:17 RepVGG-A1] (main.py 429): INFO Test: [60/1563]	Time 0.019 (0.051)	Loss 1.0431 (1.1903)	Acc@1 81.250 (74.283)	Acc@5 93.750 (91.086)	Mem 1813MB
+[2023-10-18 19:28:18 RepVGG-A1] (main.py 429): INFO Test: [70/1563]	Time 0.019 (0.048)	Loss 1.2300 (1.1939)	Acc@1 71.875 (74.076)	Acc@5 100.000 (91.417)	Mem 1813MB
+[2023-10-18 19:28:18 RepVGG-A1] (main.py 429): INFO Test: [80/1563]	Time 0.018 (0.049)	Loss 1.2302 (1.1859)	Acc@1 78.125 (74.383)	Acc@5 90.625 (91.397)	Mem 1813MB
+[2023-10-18 19:28:19 RepVGG-A1] (main.py 429): INFO Test: [90/1563]	Time 0.018 (0.047)	Loss 1.3165 (1.1746)	Acc@1 71.875 (74.657)	Acc@5 90.625 (91.587)	Mem 1813MB
+[2023-10-18 19:28:19 RepVGG-A1] (main.py 429): INFO Test: [100/1563]	Time 0.018 (0.045)	Loss 1.1983 (1.1651)	Acc@1 75.000 (74.752)	Acc@5 90.625 (91.739)	Mem 1813MB
+[2023-10-18 19:28:19 RepVGG-A1] (main.py 429): INFO Test: [110/1563]	Time 0.018 (0.044)	Loss 1.2114 (1.1648)	Acc@1 75.000 (74.887)	Acc@5 93.750 (91.723)	Mem 1813MB
+[2023-10-18 19:28:20 RepVGG-A1] (main.py 429): INFO Test: [120/1563]	Time 0.018 (0.044)	Loss 1.4388 (1.1773)	Acc@1 71.875 (74.458)	Acc@5 93.750 (91.916)	Mem 1813MB
+[2023-10-18 19:28:20 RepVGG-A1] (main.py 429): INFO Test: [130/1563]	Time 0.018 (0.043)	Loss 1.5895 (1.1762)	Acc@1 56.250 (74.356)	Acc@5 87.500 (91.937)	Mem 1813MB
+[2023-10-18 19:28:20 RepVGG-A1] (main.py 429): INFO Test: [140/1563]	Time 0.018 (0.042)	Loss 1.6077 (1.1729)	Acc@1 68.750 (74.468)	Acc@5 84.375 (91.844)	Mem 1813MB
+[2023-10-18 19:28:20 RepVGG-A1] (main.py 429): INFO Test: [150/1563]	Time 0.018 (0.041)	Loss 1.5062 (1.1883)	Acc@1 53.125 (74.048)	Acc@5 87.500 (91.660)	Mem 1813MB
+[2023-10-18 19:28:21 RepVGG-A1] (main.py 429): INFO Test: [160/1563]	Time 0.018 (0.041)	Loss 1.0781 (1.1843)	Acc@1 71.875 (74.127)	Acc@5 90.625 (91.712)	Mem 1813MB
+[2023-10-18 19:28:21 RepVGG-A1] (main.py 429): INFO Test: [170/1563]	Time 0.018 (0.040)	Loss 0.8757 (1.1762)	Acc@1 84.375 (74.342)	Acc@5 93.750 (91.740)	Mem 1813MB
+[2023-10-18 19:28:22 RepVGG-A1] (main.py 429): INFO Test: [180/1563]	Time 0.109 (0.040)	Loss 1.3827 (1.1809)	Acc@1 71.875 (74.171)	Acc@5 87.500 (91.644)	Mem 1813MB
+[2023-10-18 19:28:22 RepVGG-A1] (main.py 429): INFO Test: [190/1563]	Time 0.018 (0.039)	Loss 1.5641 (1.1849)	Acc@1 71.875 (74.100)	Acc@5 84.375 (91.607)	Mem 1813MB
+[2023-10-18 19:28:22 RepVGG-A1] (main.py 429): INFO Test: [200/1563]	Time 0.018 (0.039)	Loss 1.0299 (1.1856)	Acc@1 68.750 (73.943)	Acc@5 96.875 (91.589)	Mem 1813MB
+[2023-10-18 19:28:22 RepVGG-A1] (main.py 429): INFO Test: [210/1563]	Time 0.018 (0.039)	Loss 1.1324 (1.1805)	Acc@1 78.125 (74.097)	Acc@5 96.875 (91.691)	Mem 1813MB
+[2023-10-18 19:28:23 RepVGG-A1] (main.py 429): INFO Test: [220/1563]	Time 0.130 (0.039)	Loss 0.5889 (1.1816)	Acc@1 90.625 (74.180)	Acc@5 100.000 (91.629)	Mem 1813MB
+[2023-10-18 19:28:23 RepVGG-A1] (main.py 429): INFO Test: [230/1563]	Time 0.019 (0.038)	Loss 1.0637 (1.1871)	Acc@1 75.000 (74.040)	Acc@5 93.750 (91.477)	Mem 1813MB
+[2023-10-18 19:28:23 RepVGG-A1] (main.py 429): INFO Test: [240/1563]	Time 0.018 (0.038)	Loss 1.0026 (1.1852)	Acc@1 84.375 (74.066)	Acc@5 93.750 (91.533)	Mem 1813MB
+[2023-10-18 19:28:24 RepVGG-A1] (main.py 429): INFO Test: [250/1563]	Time 0.018 (0.038)	Loss 0.9737 (1.1821)	Acc@1 75.000 (74.153)	Acc@5 96.875 (91.559)	Mem 1813MB
+[2023-10-18 19:28:24 RepVGG-A1] (main.py 429): INFO Test: [260/1563]	Time 0.108 (0.038)	Loss 1.6365 (1.1829)	Acc@1 62.500 (74.138)	Acc@5 84.375 (91.511)	Mem 1813MB
+[2023-10-18 19:28:24 RepVGG-A1] (main.py 429): INFO Test: [270/1563]	Time 0.018 (0.037)	Loss 1.4206 (1.1777)	Acc@1 68.750 (74.216)	Acc@5 93.750 (91.594)	Mem 1813MB
+[2023-10-18 19:28:25 RepVGG-A1] (main.py 429): INFO Test: [280/1563]	Time 0.018 (0.037)	Loss 0.8518 (1.1798)	Acc@1 78.125 (74.177)	Acc@5 93.750 (91.526)	Mem 1813MB
+[2023-10-18 19:45:10 RepVGG-A1] (main.py 517): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-18 19:45:10 RepVGG-A1] (main.py 520): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 10
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-18 19:45:13 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-18 19:45:14 RepVGG-A1] (main.py 118): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-18 19:46:32 RepVGG-A1] (main.py 517): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-18 19:46:32 RepVGG-A1] (main.py 520): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 10
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-18 19:46:35 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-18 19:46:36 RepVGG-A1] (main.py 118): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)
+[2023-10-19 11:24:14 RepVGG-A1] (main.py 517): INFO Full config saved to train_results/RepVGG-A1/eval3/config.json
+[2023-10-19 11:24:14 RepVGG-A1] (main.py 520): INFO AMP_OPT_LEVEL: O0
+AUG:
+  AUTO_AUGMENT: rand-m9-mstd0.5-inc1
+  COLOR_JITTER: 0.4
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: null
+  MIXUP: 0.2
+  MIXUP_MODE: batch
+  MIXUP_PROB: 1.0
+  MIXUP_SWITCH_PROB: 0.5
+  PRESET: null
+  RECOUNT: 1
+  REMODE: pixel
+  REPROB: 0.25
+BASE:
+- ''
+DATA:
+  BATCH_SIZE: 32
+  CACHE_MODE: part
+  DATASET: imagenet
+  DATA_PATH: /mnt/datasets/ILSVRC2012
+  IMG_SIZE: 320
+  INTERPOLATION: bilinear
+  NUM_WORKERS: 8
+  PIN_MEMORY: true
+  TEST_BATCH_SIZE: 32
+  TEST_SIZE: 320
+  ZIP_MODE: false
+EVAL_MODE: true
+LOCAL_RANK: 0
+MODEL:
+  ARCH: RepVGG-A1
+  LABEL_SMOOTHING: 0.1
+  NUM_CLASSES: 1000
+  RESUME: ''
+OUTPUT: train_results/RepVGG-A1/eval3
+PRINT_FREQ: 10
+SAVE_FREQ: 1
+SEED: 0
+TAG: eval3
+TEST:
+  CROP: false
+THROUGHPUT_MODE: false
+TRAIN:
+  ACCUMULATION_STEPS: 0
+  AUTO_RESUME: true
+  BASE_LR: 0.0005
+  CLIP_GRAD: 0.0
+  EMA_ALPHA: 0.0
+  EMA_UPDATE_PERIOD: 8
+  EPOCHS: 300
+  LR_SCHEDULER:
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+    NAME: cosine
+  MIN_LR: 0.0
+  OPTIMIZER:
+    BETAS:
+    - 0.9
+    - 0.999
+    EPS: 1.0e-08
+    MOMENTUM: 0.9
+    NAME: sgd
+  SCALES_PATH: null
+  START_EPOCH: 0
+  USE_CHECKPOINT: false
+  WARMUP_EPOCHS: 20
+  WARMUP_LR: 0.0
+  WEIGHT_DECAY: 0.05
+
+[2023-10-19 11:24:19 RepVGG-A1] (main.py 102): INFO Creating model:RepVGG-A1
+[2023-10-19 11:24:21 RepVGG-A1] (main.py 118): INFO RepVGG(
+  (stage0): RepVGGBlock(
+    (nonlinearity): ReLU()
+    (se): Identity()
+    (dx_add): DxAdd()
+    (rbr_reparam): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  )
+  (stage1): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage2): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage3): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+    (1): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (6): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (7): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (8): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (9): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (10): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (11): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (12): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (13): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (stage4): ModuleList(
+    (0): RepVGGBlock(
+      (nonlinearity): ReLU()
+      (se): Identity()
+      (dx_add): DxAdd()
+      (rbr_reparam): Conv2d(256, 1280, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (gap): AdaptiveAvgPool2d(output_size=1)
+  (linear): Linear(in_features=1280, out_features=1000, bias=True)
+  (identity): Identity()
+  (dx_view): DxView()
+)

@@ -10,6 +10,8 @@ import copy
 from se_block import SEBlock
 import torch.utils.checkpoint as checkpoint
 
+from dl_adquantizer import DxAdd, DxView
+
 def conv_bn(in_channels, out_channels, kernel_size, stride, padding, groups=1):
     result = nn.Sequential()
     result.add_module('conv', nn.Conv2d(in_channels=in_channels, out_channels=out_channels,
@@ -49,7 +51,9 @@ class RepVGGBlock(nn.Module):
             self.rbr_1x1 = conv_bn(in_channels=in_channels, out_channels=out_channels, kernel_size=1, stride=stride, padding=padding_11, groups=groups)
             print('RepVGG Block, identity = ', self.rbr_identity)
 
-
+        # DX modules
+        self.dx_add = DxAdd()
+        
     def forward(self, inputs):
         if hasattr(self, 'rbr_reparam'):
             return self.nonlinearity(self.se(self.rbr_reparam(inputs)))
@@ -59,7 +63,7 @@ class RepVGGBlock(nn.Module):
         else:
             id_out = self.rbr_identity(inputs)
 
-        return self.nonlinearity(self.se(self.rbr_dense(inputs) + self.rbr_1x1(inputs) + id_out))
+        return self.nonlinearity(self.se(self.dx_add(self.dx_add(self.rbr_dense(inputs) + self.rbr_1x1(inputs)) + id_out)))
 
 
     #   Optional. This may improve the accuracy and facilitates quantization in some cases.
@@ -166,6 +170,9 @@ class RepVGG(nn.Module):
         self.stage4 = self._make_stage(int(512 * width_multiplier[3]), num_blocks[3], stride=2)
         self.gap = nn.AdaptiveAvgPool2d(output_size=1)
         self.linear = nn.Linear(int(512 * width_multiplier[3]), num_classes)
+        
+        self.identity = nn.Identity()
+        self.dx_view = DxView()
 
     def _make_stage(self, planes, num_blocks, stride):
         strides = [stride] + [1]*(num_blocks-1)
@@ -179,6 +186,7 @@ class RepVGG(nn.Module):
         return nn.ModuleList(blocks)
 
     def forward(self, x):
+        x = self.identity(x)
         out = self.stage0(x)
         for stage in (self.stage1, self.stage2, self.stage3, self.stage4):
             for block in stage:
@@ -187,7 +195,8 @@ class RepVGG(nn.Module):
                 else:
                     out = block(out)
         out = self.gap(out)
-        out = out.view(out.size(0), -1)
+        # out = out.view(out.size(0), -1)
+        out = self.dx_view(out, (out.size(0), -1))
         out = self.linear(out)
         return out
 
